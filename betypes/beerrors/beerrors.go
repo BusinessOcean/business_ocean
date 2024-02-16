@@ -1,3 +1,3 @@
 package beerrors
 
-type BeUnknownError error
+type BeError error

@@ -7,6 +7,6 @@ import (
 
 func main() {
 	fmt.Println("Hello")
-	var e beerrors.BeUnknownError = fmt.Errorf("unknown error")
+	var e beerrors.BeError = fmt.Errorf("unknown error")
 	fmt.Println(e)
 }

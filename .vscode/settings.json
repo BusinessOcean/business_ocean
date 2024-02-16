@@ -3,5 +3,10 @@
         "becore",
         "beerrors",
         "betypes"
-    ]
+    ],
+    "cSpell.ignorePaths" : [
+        ".golangci.yml",
+        ".vscode/settings.json"
+    ], 
+    "cSpell.diagnosticLevel": "Hint",
 }
