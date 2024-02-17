@@ -1,0 +1,11 @@
+version: v1
+managed:
+  enabled: true
+
+  # Go
+  go_package_prefix:
+    default: betype/hello  
+
+plugins:
+  - plugin: go
+    out: ../betypes/
