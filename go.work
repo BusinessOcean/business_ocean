@@ -1,7 +1,12 @@
-go 1.22
+go 1.22.0
 
 use (
 	./app
+	./becommand
+	./becommon
 	./becore
+	./belogger
 	./betypes
+	./features/example
+	./features/location
 )
