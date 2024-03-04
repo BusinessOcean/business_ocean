@@ -2,10 +2,12 @@ go 1.22.0
 
 use (
 	./app
-	./becommand
 	./becommon
+	./beconsole
+	./beconstants
 	./becore
 	./belogger
+	./betools
 	./betypes
 	./features/example
 	./features/location

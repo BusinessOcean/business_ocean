@@ -1,16 +1,16 @@
 run:
 	go run ./app/main.go;
 
-tidy:
+mod-tidy:
 	./scripts/go_mod_tidy.sh;
 
 cleanup:
 	./scripts/cleanup.sh;
 
-modadd:
+mod-add:
 	./scripts/go_mod_add.sh;
 
-lint:
+mod-lint:
 	./scripts/golangci-lint.sh;
 
 go-upgrade:

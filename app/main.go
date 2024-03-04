@@ -1,33 +1,13 @@
-package app
+package main
 
 import (
-	"fmt"
-
-	"go.uber.org/fx"
+	"beconsole"
+	"beconsole/commands"
 )
 
-// Define a generic type
-type Item[T any] struct {
-	Value T
-}
-
 func main() {
-	// Create a new UberFx application
-	app := fx.New(
-		fx.Provide(NewItem),
-		fx.Invoke(UseItem),
-	)
+	commands := []commands.BeCommand{}
 
-	// Run the application
-	app.Run()
-}
-
-// Create a new Item
-func NewItem() Item[string] {
-	return Item[string]{Value: "Hello, World!"}
-}
-
-// Use the Item
-func UseItem(item Item[string]) {
-	fmt.Println(item.Value)
+	var BusinessOcean = beconsole.NewBOConsole(commands)
+	_ = BusinessOcean
 }
