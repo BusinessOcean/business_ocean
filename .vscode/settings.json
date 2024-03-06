@@ -6,7 +6,8 @@
         "beconsole",
         "becore",
         "beerrors",
-        "betypes"
+        "betypes",
+        "cmds"
     ],
     "cSpell.ignorePaths" : [
         ".golangci.yml",

@@ -14,7 +14,7 @@ mod-lint:
 	./scripts/golangci-lint.sh;
 
 go-upgrade:
-	./scripts/go_upgrade.sh;
+	./scripts/upgrade_go_mods.sh
 
 mod-run:
 	./scripts/go_run_parallel.sh;

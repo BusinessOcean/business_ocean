@@ -40,15 +40,20 @@ type Command interface {
 type CmdSlice map[string]Command
 
 type BeCommand struct {
-	commands CmdSlice
-	opt      fx.Option
+	cmdSlice   map[string]Command
+	dependency fx.Option
+}
+
+// new Becommand
+func NewCommand(cmdSlice CmdSlice, dependency fx.Option) BeCommand {
+	return BeCommand{cmdSlice: cmdSlice, dependency: dependency}
 }
 
 // GetSubCommands gives a list of sub commands
 func GetSubCommands(becmd BeCommand) []*cobra.Command {
 	subCommands := make([]*cobra.Command, 0)
-	for name, cmd := range becmd.commands {
-		subCommands = append(subCommands, WrapSubCommand(name, cmd, becmd.opt))
+	for name, cmd := range becmd.cmdSlice {
+		subCommands = append(subCommands, WrapSubCommand(name, cmd, becmd.dependency))
 	}
 	return subCommands
 }
