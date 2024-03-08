@@ -2,21 +2,21 @@ package main
 
 import (
 	"beconsole"
-	"beconsole/commands"
+	"beconsole/command"
 	"businessocean/bego"
 
 	"go.uber.org/fx"
 )
 
 func main() {
-	appCmd := make([]commands.BeCommand, 0)
+	appCmd := make([]command.BeCommand, 0)
 
-	var cmds = commands.CmdSlice{
+	var cmds = command.CmdSlice{
 		"bego": bego.NewBegoServer(),
 	}
 
 	// Bego service for microservice
-	appCmd = append(appCmd, commands.NewCommand(cmds, Module))
+	appCmd = append(appCmd, command.NewCommand(cmds, Module))
 
 	var businessocean = beconsole.NewBOConsole(appCmd)
 	businessocean.Execute()

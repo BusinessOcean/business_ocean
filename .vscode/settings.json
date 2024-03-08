@@ -6,6 +6,7 @@
         "beconsole",
         "becore",
         "beerrors",
+        "beserver",
         "betypes",
         "cmds"
     ],

@@ -1,7 +1,7 @@
 package beconsole
 
 import (
-	"beconsole/commands"
+	"beconsole/command"
 
 	"github.com/spf13/cobra"
 )
@@ -37,13 +37,13 @@ type BusinessOceanConsole struct {
 }
 
 // NewBOConsole returns a new instance of BeConsole
-func NewBOConsole(beCommands []commands.BeCommand) BusinessOceanConsole {
+func NewBOConsole(beCommands []command.BeCommand) BusinessOceanConsole {
 	bc := BusinessOceanConsole{
 		Command: _rootConsole,
 	}
 
 	for _, v := range beCommands {
-		bc.AddCommand(commands.GetSubCommands(v)...)
+		bc.AddCommand(command.GetSubCommands(v)...)
 	}
 	return bc
 }

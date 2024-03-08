@@ -1,4 +1,4 @@
-package commands
+package command
 
 import (
 	"betools"
@@ -34,7 +34,7 @@ type Command interface {
 	// 	 },
 	//  }
 	//
-	Run() (CommandRunner, error)
+	Run() CommandRunner
 }
 
 type CmdSlice map[string]Command
@@ -58,6 +58,14 @@ func GetSubCommands(becmd BeCommand) []*cobra.Command {
 	return subCommands
 }
 
+// WrapSubCommand wraps a subcommand with additional functionality and returns the wrapped command.
+// It takes the name of the command, the command itself, and an fx.Option as input parameters.
+// The wrapped command is created with the provided name and the short description from the command.
+// When the wrapped command is executed, it sets up a logger, invokes the command's Run function using fx.Invoke,
+// and starts an fx application with the provided fx.Option and fx.Options.
+// The application is then started and stopped using the provided context.
+// If any errors occur during the execution, they are logged using the logger.
+// Finally, the wrapped command is returned.
 func WrapSubCommand(name string, cmd Command, opt fx.Option) *cobra.Command {
 	wrappedCmd := &cobra.Command{
 		Use:   name,
