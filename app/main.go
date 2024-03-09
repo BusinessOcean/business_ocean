@@ -4,8 +4,6 @@ import (
 	"beconsole"
 	"beconsole/command"
 	"businessocean/bego"
-
-	"go.uber.org/fx"
 )
 
 func main() {
@@ -16,10 +14,8 @@ func main() {
 	}
 
 	// Bego service for microservice
-	appCmd = append(appCmd, command.NewCommand(cmds, Module))
+	appCmd = append(appCmd, command.NewCommand(cmds, AppModule))
 
 	var businessocean = beconsole.NewBOConsole(appCmd)
 	businessocean.Execute()
 }
-
-var Module = fx.Options()

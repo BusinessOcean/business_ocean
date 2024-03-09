@@ -6,7 +6,6 @@ use (
 	./beconsole
 	./beconstants
 	./becore
-	./belogger
 	./betools
 	./betypes
 	./features/example
