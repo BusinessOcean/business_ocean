@@ -3,12 +3,14 @@
         "becmd",
         "becommands",
         "becommon",
+        "beconfig",
         "beconsole",
         "becore",
         "beerrors",
         "beserver",
         "betypes",
-        "cmds"
+        "cmds",
+        "favicons"
     ],
     "cSpell.ignorePaths" : [
         ".golangci.yml",

@@ -2,8 +2,11 @@ package bego
 
 import (
 	"beconsole/command"
+	"becore/beserver"
+	beconfig "becore/config"
 	"fmt"
 
+	"github.com/kataras/iris/v12"
 	"github.com/spf13/cobra"
 )
 
@@ -25,8 +28,10 @@ func (b *bego) Setup(cmd *cobra.Command) error {
 func (b *bego) Run() command.CommandRunner {
 
 	return func() {
+		fmt.Println("Bego Server is running....")
+		_bego := beserver.NewBeServer(beconfig.ServerConfig{AppName: "Bego"})
 
-		fmt.Println("I am working")
+		_bego.Run(iris.Addr(":8080"))
 
 	}
 }

@@ -19,6 +19,7 @@ func NewBeServer(config beconfig.ServerConfig) *BeServer {
 	_app := iris.New()
 	_app.SetName(config.AppName)
 	_app.Use(iris.Compression)
+	_app.Favicon("./static/favicons/businessocean.ico")
 
 	return &BeServer{iris.New(), config.AppName}
 }

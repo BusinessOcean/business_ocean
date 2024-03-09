@@ -5,4 +5,5 @@ type ServerConfig struct {
 	LogLevel     string
 	AppName      string
 	IsProduction bool
+	FavIconPath  string
 }
