@@ -3,6 +3,8 @@ module becore
 go 1.22
 
 require (
+	github.com/iris-contrib/middleware/cors v0.0.0-20240111010557-e34016a4d6ee
+	github.com/kataras/golog v0.1.11
 	github.com/kataras/iris/v12 v12.2.10
 	go.uber.org/fx v1.20.1
 )
@@ -24,7 +26,6 @@ require (
 	github.com/iris-contrib/schema v0.0.6 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/kataras/blocks v0.0.8 // indirect
-	github.com/kataras/golog v0.1.11 // indirect
 	github.com/kataras/pio v0.0.13 // indirect
 	github.com/kataras/sitemap v0.0.6 // indirect
 	github.com/kataras/tunnel v0.0.4 // indirect
