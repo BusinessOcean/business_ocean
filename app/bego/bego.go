@@ -2,7 +2,7 @@ package bego
 
 import (
 	"beconsole/command"
-	"becore/beconfig"
+	"becore/belogger"
 	"becore/beroutes"
 	"becore/beserver"
 	"fmt"
@@ -11,33 +11,31 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type bego struct{}
+type begoCommand struct{}
 
 // NewBego returns a new instance of Bego
-func NewBegoServer() *bego {
-	return &bego{}
+func NewBegoServer() *begoCommand {
+	return &begoCommand{}
 }
 
-func (b *bego) Short() string {
+func (b *begoCommand) Short() string {
 	return " Run Bego Server "
 }
 
-func (b *bego) Setup(cmd *cobra.Command) error {
+func (b *begoCommand) Setup(cmd *cobra.Command) error {
 	return nil
 }
 
-func (b *bego) Run() command.CommandRunner {
+func (b *begoCommand) Run() command.CommandRunner {
 
-	return func() {
+	return func(logger *belogger.BeLogger, bego *beserver.BeServer) {
 		fmt.Println("Bego Server is running....")
-		_bego := beserver.NewBeServer(beconfig.ServerConfig{AppName: "Bego"})
-		_ = _bego
 		routes := []beroutes.BeRoute{}
-		routes = append(routes, beroutes.NewBeRoute(_bego, todos{}))
-
+		routes = append(routes, beroutes.NewBeRoute(bego, todos{}))
+		logger.Error("Bego Server is running....from beconsole")
 		beroutes.NewRegisterRouteAPI(routes)
 
-		_bego.Run(iris.Addr(":8080"))
+		bego.Run(iris.Addr(":8080"))
 
 	}
 }

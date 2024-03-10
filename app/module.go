@@ -1,5 +1,9 @@
 package main
 
-import "go.uber.org/fx"
+import (
+	"becore"
 
-var AppModule = fx.Options()
+	"go.uber.org/fx"
+)
+
+var AppModule = fx.Options(becore.BecoreModule)
