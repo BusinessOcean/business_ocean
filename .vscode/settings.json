@@ -6,8 +6,10 @@
         "beconfig",
         "beconsole",
         "becore",
+        "bedatabase",
         "beerrors",
         "beserver",
+        "beservice",
         "betypes",
         "cmds",
         "favicons"

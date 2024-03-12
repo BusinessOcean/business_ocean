@@ -27,5 +27,12 @@ generate:
 	cd .proto;
 	buf generate proto;
 
+service-run:
+	cd ./beservice && ./service_cmd.sh;
+
+feature-run:
+	cd ./features && ./features_cmd.sh;
+
+
 
 .PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync

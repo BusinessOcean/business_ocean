@@ -1,8 +1,8 @@
 package beroutes
 
-import "go.uber.org/fx"
+// import "go.uber.org/fx"
 
 // Module exports dependency to container
-var Module = fx.Options(
-	fx.Provide(NewRegisterRouteAPI),
-)
+// var Module = fx.Options(
+// 	fx.Provide(NewRegisterRouteAPI),
+// )

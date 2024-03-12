@@ -29,6 +29,9 @@ func (b *begoCommand) Setup(cmd *cobra.Command) error {
 func (b *begoCommand) Run() command.CommandRunner {
 
 	return func(logger *belogger.BeLogger, bego *beserver.BeServer) {
+		logger.Info(`+-----------------------+`)
+		logger.Info(`| Bego App ARCHITECTURE |`)
+		logger.Info(`+-----------------------+`)
 		fmt.Println("Bego Server is running....")
 		routes := []beroutes.BeRoute{}
 		routes = append(routes, beroutes.NewBeRoute(bego, todos{}))
@@ -48,6 +51,6 @@ func (t todos) RegisterAPI(server *beserver.BeServer) {
 	fmt.Println("Registering API")
 	server.Get("/todos", func(ctx beserver.BeContext) {
 		ctx.JSON([]string{"Write a blog post", "Write a book", "Write a song"})
-	}, nil)
+	})
 
 }
