@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+// import "token.proto";
+
+package token;
+
+message Token {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+}
+
+service TokenService {
+  rpc CreateToken(CreateTokenRequest) returns (Token);
+  rpc ReadToken(ReadTokenRequest) returns (Token);
+  rpc UpdateToken(UpdateTokenRequest) returns (Token);
+  rpc DeleteToken(DeleteTokenRequest) returns (DeleteTokenResponse);
+}
+
+message CreateTokenRequest {
+  string title = 1;
+  string description = 2;
+}
+
+message ReadTokenRequest {
+  int32 id = 1;
+}
+
+message UpdateTokenRequest {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+}
+
+message DeleteTokenRequest {
+  int32 id = 1;
+}
+
+message DeleteTokenResponse {
+  bool success = 1;
+}

@@ -12,7 +12,8 @@
         "beservice",
         "betypes",
         "cmds",
-        "favicons"
+        "favicons",
+        "protobuf"
     ],
     "cSpell.ignorePaths" : [
         ".golangci.yml",

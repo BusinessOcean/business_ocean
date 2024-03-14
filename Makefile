@@ -33,6 +33,9 @@ service-run:
 feature-run:
 	cd ./features && ./features_cmd.sh;
 
+mirror-folder:
+	./scripts/mirror_folder.sh beservice api/protobuf;
+	./scripts/mirror_folder.sh features api/protobuf;
 
 
-.PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync
+.PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync mod-run service-run feature-run mirror-folder
