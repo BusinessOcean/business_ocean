@@ -1,0 +1,29 @@
+# version: v1
+# name: buf.build/businessocean/bego
+# # deps:
+#   # - buf.build/envoyproxy/protoc-gen-validate
+# build:
+#   excludes: []
+# lint:
+#   use:
+#     - DEFAULT
+    
+#   except: 
+#     - PACKAGE_VERSION_SUFFIX
+    
+#   ignore: []
+#   ignore_only: {}
+#   allow_comment_ignores: false
+#   enum_zero_value_suffix: _UNSPECIFIED
+#   rpc_allow_same_request_response: true
+#   rpc_allow_google_protobuf_empty_requests: true
+#   rpc_allow_google_protobuf_empty_responses: true
+  
+#   service_suffix: Service
+# breaking:
+#   use:
+#     - FILE
+#   except: []
+#   ignore: []
+#   ignore_only: {}
+#   ignore_unstable_packages: false

@@ -1,4 +1,5 @@
 version: v1
 directories:
-  - api/protobuf/authentication
   - api/protobuf/example
+  - api/protobuf/google
+  # - api/protobuf/validate
