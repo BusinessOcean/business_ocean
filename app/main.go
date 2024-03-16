@@ -3,6 +3,7 @@ package main
 import (
 	"beconsole"
 	"beconsole/command"
+	"beservice/example/todo"
 	"businessocean/bego"
 )
 
@@ -12,6 +13,8 @@ func main() {
 	var cmds = command.CmdSlice{
 		"bego": bego.NewBegoServer(),
 	}
+	t := todo.Todo{}
+	t.ValidateAll()
 
 	// Bego service for microservice
 	appCmd = append(appCmd, command.NewCommand(cmds, AppModule))

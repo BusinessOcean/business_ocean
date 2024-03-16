@@ -1,17 +1,20 @@
 package becore
 
+import "becore/bebase"
+
 type BeCore interface {
-
-	// IsDev returns whether the app is in dev mode.
-	IsDev() bool
-
-	// Bootstrap takes care for initializing the application
-	// (open db connections, load settings, config setting, etc.).
-	//
-	// It will call ResetBootstrapState() if the application was already bootstrapped.
-	Bootstrap() error
-
-	// ResetBootstrapState takes care for releasing initialized app resources
-	// (eg. closing db connections).
-	ResetBootstrapState() error
+	bebase.ConfigsFacade
+	bebase.BootstrapFacade
+	bebase.SettingAndBackupFacade
+	bebase.AdminFacade
 }
+
+// BeCoreFacade: BeCoreFacade
+
+// type BeRandom struct {
+// }
+
+// // New BeRandom
+// func NewBeRandom() *BeRandom {
+// 	return &BeRandom{}
+// }
