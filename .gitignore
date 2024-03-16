@@ -1,3 +1,5 @@
 businessocean
 bego
 /build
+api/protobuf/*/google/*
+api/protobuf/*/validate/*

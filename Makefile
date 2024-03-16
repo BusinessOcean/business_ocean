@@ -40,8 +40,9 @@ mod-sync:
 
 # Target: proto-gen
 # Description: Generates API files using the gen-api-folder.sh script and buf generate command.
+# ./scripts/gen-api-folder.sh beservice api/protobuf;
+
 proto-gen:
-	./scripts/gen-api-folder.sh beservice api/protobuf;
 	./scripts/gen-api-folder.sh features api/protobuf;
 	buf generate;
 
@@ -61,5 +62,11 @@ feature-run:
 # 	./scripts/mirror_folder.sh beservice api/protobuf;
 # 	./scripts/mirror_folder.sh features api/protobuf;
 
+proto-clone:
+	./scripts/copy_common_proto.sh api/protobuf/example;  
+
 # PHONY targets
-.PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync mod-run service-run feature-run mirror-folder
+.PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync mod-run service-run \
+	feature-run mirror-folder proto-gen mod-tidy mod-add mod-lint mod-run \
+	parallel-run parallel-run-features parallel-run-beservice parallel-run-all \
+	proto-clone

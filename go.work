@@ -7,11 +7,12 @@ use (
 	./beconstants
 	./becore
 	./bedatabase
-	./beservice/authentication
-	./beservice/notifications
-	./beservice/profile
+	./beservice
 	./betools
 	./betypes
+	./features/authentication
 	./features/example
 	./features/location
+	./features/notifications
+	./features/profile
 )
