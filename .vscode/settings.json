@@ -15,6 +15,7 @@
         "betypes",
         "cmds",
         "favicons",
+        "openapiv",
         "protobuf"
     ],
     "cSpell.ignorePaths" : [

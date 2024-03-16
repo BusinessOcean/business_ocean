@@ -63,7 +63,8 @@ feature-run:
 # 	./scripts/mirror_folder.sh features api/protobuf;
 
 proto-clone:
-	./scripts/copy_common_proto.sh api/protobuf/example;  
+	./scripts/copy_common_proto.sh api/protobuf;  
+	# ./scripts/copy_common_proto.sh api/protobuf/location;  
 
 # PHONY targets
 .PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync mod-run service-run \

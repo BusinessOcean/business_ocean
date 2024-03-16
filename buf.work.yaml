@@ -1,3 +1,4 @@
 version: v1
 directories:
-  - api/protobuf/example
+  - api/protobuf
+  # - api/protobuf/location

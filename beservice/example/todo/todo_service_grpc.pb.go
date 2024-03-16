@@ -34,7 +34,7 @@ func NewTodoServiceClient(cc grpc.ClientConnInterface) TodoServiceClient {
 
 func (c *todoServiceClient) CreateTodo(ctx context.Context, in *CreateTodoRequest, opts ...grpc.CallOption) (*CreateTodoResponse, error) {
 	out := new(CreateTodoResponse)
-	err := c.cc.Invoke(ctx, "/todo.TodoService/CreateTodo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/example.todo.TodoService/CreateTodo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (c *todoServiceClient) CreateTodo(ctx context.Context, in *CreateTodoReques
 
 func (c *todoServiceClient) ReadTodo(ctx context.Context, in *ReadTodoRequest, opts ...grpc.CallOption) (*ReadTodoResponse, error) {
 	out := new(ReadTodoResponse)
-	err := c.cc.Invoke(ctx, "/todo.TodoService/ReadTodo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/example.todo.TodoService/ReadTodo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func (c *todoServiceClient) ReadTodo(ctx context.Context, in *ReadTodoRequest, o
 
 func (c *todoServiceClient) UpdateTodo(ctx context.Context, in *UpdateTodoRequest, opts ...grpc.CallOption) (*UpdateTodoResponse, error) {
 	out := new(UpdateTodoResponse)
-	err := c.cc.Invoke(ctx, "/todo.TodoService/UpdateTodo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/example.todo.TodoService/UpdateTodo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (c *todoServiceClient) UpdateTodo(ctx context.Context, in *UpdateTodoReques
 
 func (c *todoServiceClient) DeleteTodo(ctx context.Context, in *DeleteTodoRequest, opts ...grpc.CallOption) (*DeleteTodoResponse, error) {
 	out := new(DeleteTodoResponse)
-	err := c.cc.Invoke(ctx, "/todo.TodoService/DeleteTodo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/example.todo.TodoService/DeleteTodo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func _TodoService_CreateTodo_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/todo.TodoService/CreateTodo",
+		FullMethod: "/example.todo.TodoService/CreateTodo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TodoServiceServer).CreateTodo(ctx, req.(*CreateTodoRequest))
@@ -134,7 +134,7 @@ func _TodoService_ReadTodo_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/todo.TodoService/ReadTodo",
+		FullMethod: "/example.todo.TodoService/ReadTodo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TodoServiceServer).ReadTodo(ctx, req.(*ReadTodoRequest))
@@ -152,7 +152,7 @@ func _TodoService_UpdateTodo_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/todo.TodoService/UpdateTodo",
+		FullMethod: "/example.todo.TodoService/UpdateTodo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TodoServiceServer).UpdateTodo(ctx, req.(*UpdateTodoRequest))
@@ -170,7 +170,7 @@ func _TodoService_DeleteTodo_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/todo.TodoService/DeleteTodo",
+		FullMethod: "/example.todo.TodoService/DeleteTodo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TodoServiceServer).DeleteTodo(ctx, req.(*DeleteTodoRequest))
@@ -182,7 +182,7 @@ func _TodoService_DeleteTodo_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TodoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "todo.TodoService",
+	ServiceName: "example.todo.TodoService",
 	HandlerType: (*TodoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -203,5 +203,5 @@ var TodoService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "todo/todo_service.proto",
+	Metadata: "example/todo/todo_service.proto",
 }

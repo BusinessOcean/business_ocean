@@ -1,10 +1,5 @@
 syntax = "proto3";
-package todo;
-
-// import "todo/todo.proto";
-
-// import "buf/validate/validate.proto";
-// import "google/protobuf/timestamp.proto";
+package example.todo;
 
 import "validate/validate.proto";
 
