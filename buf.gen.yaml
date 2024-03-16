@@ -22,7 +22,7 @@ plugins:
     out: ./beservice
     opt:
       - paths=source_relative
-      - require_unimplemented_servers=false
+      - require_unimplemented_servers=true
 
   - name: grpc-gateway
     out: ./beservice

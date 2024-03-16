@@ -1,0 +1,77 @@
+syntax = "proto3";
+package location.hello;
+
+import "google/protobuf/date/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "example";
+
+message Persion {
+  int32 id = 1;
+  // User's title, must be at least 1 character long.
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+  string name = 5 [(validate.field).string.min_len = 1];
+  int32 age = 6 [(validate.field).cel = {
+    id: "user.age",
+    expression: "this < 18 ? 'User must be at least 18 years old': ''"
+  }];
+  google.protobuf.date.Timestamp purchase_date = 7;
+  google.protobuf.date.Timestamp delivery_date = 8;
+
+  string price = 9 [(validate.field).cel = {
+    id: "transaction.price",
+    message: "price must be positive and include a valid currency symbol ($ or £)",
+    expression: "(this.startsWith('$') || this.startsWith('£')) && double(this.substring(1)) > 0"
+  }];
+
+  option (validate.message).cel = {
+    id: "transaction.delivery_date",
+    message: "delivery date must be after purchase date",
+    expression: "this.delivery_date > this.purchase_date"
+  };
+}
+
+service PersionService {
+  rpc CreatePersion(CreatePersionRequest) returns (CreatePersionResponse);
+  rpc ReadPersion(ReadPersionRequest) returns (ReadPersionResponse);
+  rpc UpdatePersion(UpdatePersionRequest) returns (UpdatePersionResponse);
+  rpc DeletePersion(DeletePersionRequest) returns (DeletePersionResponse);
+}
+
+message CreatePersionRequest {
+  string title = 1;
+  string description = 2;
+}
+
+message CreatePersionResponse {
+  Persion Persion = 1;
+}
+
+message ReadPersionRequest {
+  int32 id = 1;
+}
+
+message ReadPersionResponse {
+  Persion Persion = 1;
+}
+
+message UpdatePersionRequest {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+}
+
+message UpdatePersionResponse {
+  Persion Persion = 1;
+}
+
+message DeletePersionRequest {
+  int32 id = 1;
+}
+
+message DeletePersionResponse {
+  bool success = 1;
+}
