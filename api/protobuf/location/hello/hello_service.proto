@@ -1,7 +1,7 @@
 syntax = "proto3";
 package location.hello;
 
-import "google/protobuf/date/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
 option go_package = "example";
@@ -17,8 +17,8 @@ message Persion {
     id: "user.age",
     expression: "this < 18 ? 'User must be at least 18 years old': ''"
   }];
-  google.protobuf.date.Timestamp purchase_date = 7;
-  google.protobuf.date.Timestamp delivery_date = 8;
+  google.protobuf.Timestamp purchase_date = 7;
+  google.protobuf.Timestamp delivery_date = 8;
 
   string price = 9 [(validate.field).cel = {
     id: "transaction.price",

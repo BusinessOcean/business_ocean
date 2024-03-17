@@ -21,9 +21,9 @@
 package api
 
 import (
-	protobuf "google.golang.org/protobuf"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -147,7 +147,7 @@ func (FieldBehavior) EnumDescriptor() ([]byte, []int) {
 
 var file_google_api_field_behavior_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
-		ExtendedType:  (*protobuf.FieldOptions)(nil),
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: ([]FieldBehavior)(nil),
 		Field:         1052,
 		Name:          "google.api.field_behavior",
@@ -156,7 +156,7 @@ var file_google_api_field_behavior_proto_extTypes = []protoimpl.ExtensionInfo{
 	},
 }
 
-// Extension fields to protobuf.FieldOptions.
+// Extension fields to descriptorpb.FieldOptions.
 var (
 	// A designation of a specific field behavior (required, output only, etc.)
 	// in protobuf messages.
@@ -226,8 +226,8 @@ func file_google_api_field_behavior_proto_rawDescGZIP() []byte {
 
 var file_google_api_field_behavior_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_google_api_field_behavior_proto_goTypes = []interface{}{
-	(FieldBehavior)(0),            // 0: google.api.FieldBehavior
-	(*protobuf.FieldOptions)(nil), // 1: google.protobuf.FieldOptions
+	(FieldBehavior)(0),                // 0: google.api.FieldBehavior
+	(*descriptorpb.FieldOptions)(nil), // 1: google.protobuf.FieldOptions
 }
 var file_google_api_field_behavior_proto_depIdxs = []int32{
 	1, // 0: google.api.field_behavior:extendee -> google.protobuf.FieldOptions

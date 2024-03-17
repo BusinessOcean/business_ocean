@@ -22,9 +22,9 @@ package validate
 
 import (
 	_ "beservice/validate/priv"
-	protobuf "google.golang.org/protobuf"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
@@ -6091,7 +6091,7 @@ func (*TimestampRules_GtNow) isTimestampRules_GreaterThan() {}
 
 var file_validate_validate_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
-		ExtendedType:  (*protobuf.MessageOptions)(nil),
+		ExtendedType:  (*descriptorpb.MessageOptions)(nil),
 		ExtensionType: (*MessageConstraints)(nil),
 		Field:         1159,
 		Name:          "validate.message",
@@ -6099,7 +6099,7 @@ var file_validate_validate_proto_extTypes = []protoimpl.ExtensionInfo{
 		Filename:      "validate/validate.proto",
 	},
 	{
-		ExtendedType:  (*protobuf.OneofOptions)(nil),
+		ExtendedType:  (*descriptorpb.OneofOptions)(nil),
 		ExtensionType: (*OneofConstraints)(nil),
 		Field:         1159,
 		Name:          "validate.oneof",
@@ -6107,7 +6107,7 @@ var file_validate_validate_proto_extTypes = []protoimpl.ExtensionInfo{
 		Filename:      "validate/validate.proto",
 	},
 	{
-		ExtendedType:  (*protobuf.FieldOptions)(nil),
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*FieldConstraints)(nil),
 		Field:         1159,
 		Name:          "validate.field",
@@ -6116,7 +6116,7 @@ var file_validate_validate_proto_extTypes = []protoimpl.ExtensionInfo{
 	},
 }
 
-// Extension fields to protobuf.MessageOptions.
+// Extension fields to descriptorpb.MessageOptions.
 var (
 	// Rules specify the validations to be performed on this message. By default,
 	// no validation is performed against a message.
@@ -6125,7 +6125,7 @@ var (
 	E_Message = &file_validate_validate_proto_extTypes[0]
 )
 
-// Extension fields to protobuf.OneofOptions.
+// Extension fields to descriptorpb.OneofOptions.
 var (
 	// Rules specify the validations to be performed on this oneof. By default,
 	// no validation is performed against a oneof.
@@ -6134,7 +6134,7 @@ var (
 	E_Oneof = &file_validate_validate_proto_extTypes[1]
 )
 
-// Extension fields to protobuf.FieldOptions.
+// Extension fields to descriptorpb.FieldOptions.
 var (
 	// Rules specify the validations to be performed on this field. By default,
 	// no validation is performed against a field.
@@ -9383,38 +9383,38 @@ func file_validate_validate_proto_rawDescGZIP() []byte {
 var file_validate_validate_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_validate_validate_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_validate_validate_proto_goTypes = []interface{}{
-	(Ignore)(0),                     // 0: validate.Ignore
-	(KnownRegex)(0),                 // 1: validate.KnownRegex
-	(*MessageConstraints)(nil),      // 2: validate.MessageConstraints
-	(*OneofConstraints)(nil),        // 3: validate.OneofConstraints
-	(*FieldConstraints)(nil),        // 4: validate.FieldConstraints
-	(*FloatRules)(nil),              // 5: validate.FloatRules
-	(*DoubleRules)(nil),             // 6: validate.DoubleRules
-	(*Int32Rules)(nil),              // 7: validate.Int32Rules
-	(*Int64Rules)(nil),              // 8: validate.Int64Rules
-	(*UInt32Rules)(nil),             // 9: validate.UInt32Rules
-	(*UInt64Rules)(nil),             // 10: validate.UInt64Rules
-	(*SInt32Rules)(nil),             // 11: validate.SInt32Rules
-	(*SInt64Rules)(nil),             // 12: validate.SInt64Rules
-	(*Fixed32Rules)(nil),            // 13: validate.Fixed32Rules
-	(*Fixed64Rules)(nil),            // 14: validate.Fixed64Rules
-	(*SFixed32Rules)(nil),           // 15: validate.SFixed32Rules
-	(*SFixed64Rules)(nil),           // 16: validate.SFixed64Rules
-	(*BoolRules)(nil),               // 17: validate.BoolRules
-	(*StringRules)(nil),             // 18: validate.StringRules
-	(*BytesRules)(nil),              // 19: validate.BytesRules
-	(*EnumRules)(nil),               // 20: validate.EnumRules
-	(*RepeatedRules)(nil),           // 21: validate.RepeatedRules
-	(*MapRules)(nil),                // 22: validate.MapRules
-	(*AnyRules)(nil),                // 23: validate.AnyRules
-	(*DurationRules)(nil),           // 24: validate.DurationRules
-	(*TimestampRules)(nil),          // 25: validate.TimestampRules
-	(*Constraint)(nil),              // 26: validate.Constraint
-	(*durationpb.Duration)(nil),     // 27: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),   // 28: google.protobuf.Timestamp
-	(*protobuf.MessageOptions)(nil), // 29: google.protobuf.MessageOptions
-	(*protobuf.OneofOptions)(nil),   // 30: google.protobuf.OneofOptions
-	(*protobuf.FieldOptions)(nil),   // 31: google.protobuf.FieldOptions
+	(Ignore)(0),                         // 0: validate.Ignore
+	(KnownRegex)(0),                     // 1: validate.KnownRegex
+	(*MessageConstraints)(nil),          // 2: validate.MessageConstraints
+	(*OneofConstraints)(nil),            // 3: validate.OneofConstraints
+	(*FieldConstraints)(nil),            // 4: validate.FieldConstraints
+	(*FloatRules)(nil),                  // 5: validate.FloatRules
+	(*DoubleRules)(nil),                 // 6: validate.DoubleRules
+	(*Int32Rules)(nil),                  // 7: validate.Int32Rules
+	(*Int64Rules)(nil),                  // 8: validate.Int64Rules
+	(*UInt32Rules)(nil),                 // 9: validate.UInt32Rules
+	(*UInt64Rules)(nil),                 // 10: validate.UInt64Rules
+	(*SInt32Rules)(nil),                 // 11: validate.SInt32Rules
+	(*SInt64Rules)(nil),                 // 12: validate.SInt64Rules
+	(*Fixed32Rules)(nil),                // 13: validate.Fixed32Rules
+	(*Fixed64Rules)(nil),                // 14: validate.Fixed64Rules
+	(*SFixed32Rules)(nil),               // 15: validate.SFixed32Rules
+	(*SFixed64Rules)(nil),               // 16: validate.SFixed64Rules
+	(*BoolRules)(nil),                   // 17: validate.BoolRules
+	(*StringRules)(nil),                 // 18: validate.StringRules
+	(*BytesRules)(nil),                  // 19: validate.BytesRules
+	(*EnumRules)(nil),                   // 20: validate.EnumRules
+	(*RepeatedRules)(nil),               // 21: validate.RepeatedRules
+	(*MapRules)(nil),                    // 22: validate.MapRules
+	(*AnyRules)(nil),                    // 23: validate.AnyRules
+	(*DurationRules)(nil),               // 24: validate.DurationRules
+	(*TimestampRules)(nil),              // 25: validate.TimestampRules
+	(*Constraint)(nil),                  // 26: validate.Constraint
+	(*durationpb.Duration)(nil),         // 27: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),       // 28: google.protobuf.Timestamp
+	(*descriptorpb.MessageOptions)(nil), // 29: google.protobuf.MessageOptions
+	(*descriptorpb.OneofOptions)(nil),   // 30: google.protobuf.OneofOptions
+	(*descriptorpb.FieldOptions)(nil),   // 31: google.protobuf.FieldOptions
 }
 var file_validate_validate_proto_depIdxs = []int32{
 	26, // 0: validate.MessageConstraints.cel:type_name -> validate.Constraint

@@ -21,9 +21,9 @@
 package priv
 
 import (
-	protobuf "google.golang.org/protobuf"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -149,7 +149,7 @@ func (x *Constraint) GetExpression() string {
 
 var file_validate_priv_private_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
-		ExtendedType:  (*protobuf.FieldOptions)(nil),
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*FieldConstraints)(nil),
 		Field:         1160,
 		Name:          "validate.priv.field",
@@ -158,7 +158,7 @@ var file_validate_priv_private_proto_extTypes = []protoimpl.ExtensionInfo{
 	},
 }
 
-// Extension fields to protobuf.FieldOptions.
+// Extension fields to descriptorpb.FieldOptions.
 var (
 	// Do not use. Internal to protovalidate library
 	//
@@ -215,9 +215,9 @@ func file_validate_priv_private_proto_rawDescGZIP() []byte {
 
 var file_validate_priv_private_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_validate_priv_private_proto_goTypes = []interface{}{
-	(*FieldConstraints)(nil),      // 0: validate.priv.FieldConstraints
-	(*Constraint)(nil),            // 1: validate.priv.Constraint
-	(*protobuf.FieldOptions)(nil), // 2: google.protobuf.FieldOptions
+	(*FieldConstraints)(nil),          // 0: validate.priv.FieldConstraints
+	(*Constraint)(nil),                // 1: validate.priv.Constraint
+	(*descriptorpb.FieldOptions)(nil), // 2: google.protobuf.FieldOptions
 }
 var file_validate_priv_private_proto_depIdxs = []int32{
 	1, // 0: validate.priv.FieldConstraints.cel:type_name -> validate.priv.Constraint
