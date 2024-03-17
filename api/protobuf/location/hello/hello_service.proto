@@ -46,7 +46,7 @@ message CreatePersionRequest {
 }
 
 message CreatePersionResponse {
-  Persion Persion = 1;
+  Persion persion = 1;
 }
 
 message ReadPersionRequest {
@@ -54,7 +54,7 @@ message ReadPersionRequest {
 }
 
 message ReadPersionResponse {
-  Persion Persion = 1;
+  Persion persion = 1;
 }
 
 message UpdatePersionRequest {
@@ -65,7 +65,7 @@ message UpdatePersionRequest {
 }
 
 message UpdatePersionResponse {
-  Persion Persion = 1;
+  Persion persion = 1;
 }
 
 message DeletePersionRequest {

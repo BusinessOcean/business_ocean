@@ -20,7 +20,7 @@
     "helloCreatePersionResponse": {
       "type": "object",
       "properties": {
-        "Persion": {
+        "persion": {
           "$ref": "#/definitions/helloPersion"
         }
       }
@@ -73,7 +73,7 @@
     "helloReadPersionResponse": {
       "type": "object",
       "properties": {
-        "Persion": {
+        "persion": {
           "$ref": "#/definitions/helloPersion"
         }
       }
@@ -81,7 +81,7 @@
     "helloUpdatePersionResponse": {
       "type": "object",
       "properties": {
-        "Persion": {
+        "persion": {
           "$ref": "#/definitions/helloPersion"
         }
       }

@@ -11,7 +11,7 @@ use (
 	./beservice
 	./betools
 	./betypes
-	./features/authentication
+	./features/auth
 	./features/example
 	./features/location
 	./features/notifications
