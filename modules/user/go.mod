@@ -1,4 +1,4 @@
 // go
-module beauth
+module user
 
 go 1.22

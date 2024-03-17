@@ -11,9 +11,9 @@ use (
 	./beservice
 	./betools
 	./betypes
-	./features/auth
-	./features/example
-	./features/location
-	./features/notifications
-	./features/profile
+	./modules/auth
+	./modules/example
+	./modules/location
+	./modules/notifications
+	./modules/user
 )
