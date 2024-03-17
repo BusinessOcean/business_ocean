@@ -16,7 +16,7 @@ type BeContext = iris.Context
 
 // type BeContext  iris.Context
 
-func NewBeServer(config beconfig.ServerConfig) *BeServer {
+func NewBeServer(config *beconfig.Config) *BeServer {
 	_app := iris.New()
 	_app.SetName(config.AppName)
 	_app.Use(iris.Compression)

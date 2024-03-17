@@ -37,7 +37,6 @@ func (b *begoCommand) Run() command.CommandRunner {
 		routes = append(routes, beroutes.NewBeRoute(bego, todos{}))
 		logger.Error("Bego Server is running....from beconsole")
 		beroutes.NewRegisterRouteAPI(routes)
-
 		bego.Run(iris.Addr(":8080"))
 
 	}

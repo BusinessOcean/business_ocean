@@ -11,6 +11,6 @@ import (
 // Module exports dependency to container
 var BecoreModule = fx.Options(
 	fx.Provide(belogger.NewBeLogger),
-	fx.Provide(beconfig.NewServerConfig),
+	fx.Provide(beconfig.NewConfig),
 	fx.Provide(beserver.NewBeServer),
 )
