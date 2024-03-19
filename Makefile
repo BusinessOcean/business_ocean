@@ -1,3 +1,5 @@
+include .env
+export
 # Target: run
 # Description: Runs the main.go file using the 'go run' command.
 run:
@@ -66,8 +68,14 @@ proto-clone:
 	./scripts/copy_common_proto.sh api/protobuf;  
 	# ./scripts/copy_common_proto.sh api/protobuf/location;  
 
+
+update-folder-structure:
+	tree >> folder_structure.txt;  
+
+
+
 # PHONY targets
 .PHONY: run tidy generate cleanup modadd lint go-upgrade mod-sync mod-run service-run \
 	feature-run mirror-folder proto-gen mod-tidy mod-add mod-lint mod-run \
 	parallel-run parallel-run-features parallel-run-beservice parallel-run-all \
-	proto-clone
+	proto-clone update-folder-structure 

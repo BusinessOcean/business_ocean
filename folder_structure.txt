@@ -1,0 +1,249 @@
+.
+├── api
+│   ├── docs
+│   │   ├── openapi
+│   │   │   └── openapi.yaml
+│   │   └── swagger
+│   │       ├── example
+│   │       │   └── todo
+│   │       │       └── todo_service.swagger.json
+│   │       ├── google
+│   │       │   ├── api
+│   │       │   │   ├── annotations.swagger.json
+│   │       │   │   ├── field_behavior.swagger.json
+│   │       │   │   ├── httpbody.swagger.json
+│   │       │   │   └── http.swagger.json
+│   │       │   └── protobuf
+│   │       │       ├── any
+│   │       │       │   └── any.swagger.json
+│   │       │       ├── date
+│   │       │       │   └── timestamp.swagger.json
+│   │       │       ├── descriptor.swagger.json
+│   │       │       ├── duration
+│   │       │       │   └── duration.swagger.json
+│   │       │       ├── empty.swagger.json
+│   │       │       └── _timestamp.swagger.json
+│   │       ├── location
+│   │       │   └── hello
+│   │       │       └── hello_service.swagger.json
+│   │       ├── todo
+│   │       │   └── todo_service.swagger.json
+│   │       └── validate
+│   │           ├── expression.swagger.json
+│   │           ├── priv
+│   │           │   └── private.swagger.json
+│   │           └── validate.swagger.json
+│   └── protobuf
+│       ├── auth
+│       ├── authentication
+│       ├── _buf.example
+│       ├── buf.yaml
+│       ├── example
+│       │   └── todo
+│       │       └── todo_service.proto
+│       ├── google
+│       │   └── api
+│       │       ├── annotations.proto
+│       │       ├── field_behavior.proto
+│       │       ├── httpbody.proto
+│       │       └── http.proto
+│       ├── location
+│       │   └── hello
+│       │       └── hello_service.proto
+│       ├── notifications
+│       ├── profile
+│       └── validate
+│           ├── expression.proto
+│           ├── priv
+│           │   └── private.proto
+│           └── validate.proto
+├── app
+│   ├── bego
+│   │   ├── bego.go
+│   │   └── module.go
+│   ├── go.mod
+│   ├── go.sum
+│   ├── main.go
+│   └── module.go
+├── becommon
+│   ├── go.mod
+│   ├── go.sum
+│   └── modules.go
+├── beconsole
+│   ├── beconsole.go
+│   ├── command
+│   │   ├── command.go
+│   │   └── server.go
+│   ├── go.mod
+│   ├── go.sum
+│   └── modules.go
+├── beconstants
+│   ├── constants.go
+│   └── go.mod
+├── becore
+│   ├── bebase
+│   │   └── bebase.go
+│   ├── beconfig
+│   │   └── beconfig.go
+│   ├── becore.go
+│   ├── belogger
+│   │   ├── belogger.go
+│   │   └── modules.go
+│   ├── beroutes
+│   │   ├── beroutes.go
+│   │   └── server_routes.go
+│   ├── beserver
+│   │   └── beserver.go
+│   ├── go.mod
+│   ├── go.sum
+│   ├── infrastructure
+│   │   ├── bucket.go
+│   │   ├── db.go
+│   │   ├── firebase.go
+│   │   ├── gmail.go
+│   │   ├── infrastructure.go
+│   │   ├── migration.go
+│   │   └── router.go
+│   └── modules.go
+├── bedatabase
+│   ├── bedatabase.go
+│   └── go.mod
+├── beservice
+│   ├── beservice.go
+│   ├── example
+│   │   └── todo
+│   │       ├── todo_service_grpc.pb.go
+│   │       ├── todo_service.pb.go
+│   │       ├── todo_service.pb.gw.go
+│   │       └── todo_service.pb.validate.go
+│   ├── go.mod
+│   ├── google
+│   │   └── api
+│   │       ├── annotations.pb.go
+│   │       ├── annotations.pb.validate.go
+│   │       ├── field_behavior.pb.go
+│   │       ├── field_behavior.pb.validate.go
+│   │       ├── httpbody.pb.go
+│   │       ├── httpbody.pb.validate.go
+│   │       ├── http.pb.go
+│   │       └── http.pb.validate.go
+│   ├── go.sum
+│   ├── location
+│   │   └── hello
+│   │       ├── hello_service_grpc.pb.go
+│   │       ├── hello_service.pb.go
+│   │       ├── hello_service.pb.gw.go
+│   │       └── hello_service.pb.validate.go
+│   └── validate
+│       ├── expression.pb.go
+│       ├── expression.pb.validate.go
+│       ├── priv
+│       │   ├── private.pb.go
+│       │   └── private.pb.validate.go
+│       ├── validate.pb.go
+│       └── validate.pb.validate.go
+├── betools
+│   ├── belogger.go
+│   ├── filesystem
+│   │   └── filesystem.go
+│   ├── go.mod
+│   └── go.sum
+├── betypes
+│   ├── beerrors
+│   │   └── beerrors.go
+│   ├── go.mod
+│   └── modules.go
+├── buf.gen.yaml
+├── buf.lock
+├── buf.work.yaml
+├── build
+│   └── bego
+├── folder_structure.txt
+├── go.work
+├── go.work.sum
+├── LICENSE
+├── Makefile
+├── modules
+│   ├── auth
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   ├── example
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── modules.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   ├── location
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── modules.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   ├── modules_cmd.sh
+│   ├── notifications
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   └── user
+│       ├── adapters
+│       │   └── adapters.go
+│       ├── go.mod
+│       ├── middlewares
+│       │   └── middlewares.go
+│       ├── models
+│       │   └── id.go
+│       ├── repository
+│       │   └── repository.go
+│       └── routes
+│           └── routes.go
+├── ReadMe.md
+├── schema
+├── scripts
+│   ├── cleanup.sh
+│   ├── copy_common_proto.sh
+│   ├── gen-api-folder.sh
+│   ├── go_mod_add.sh
+│   ├── go_mod_tidy.sh
+│   ├── go_run_parallel.sh
+│   ├── mirror_folder.sh
+│   ├── run_linter.sh
+│   └── upgrade_go_mods.sh
+├── static
+│   ├── favicons
+│   │   └── businessocean.ico
+│   └── logo
+│       └── businessocean.svg
+└── tmp
+
+96 directories, 151 files
