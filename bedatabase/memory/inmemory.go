@@ -61,5 +61,9 @@ func (db *InMemoryDatabase) Delete(id int) error {
 
 // Query performs a query on the in-memory database (no operation for in-memory implementation).
 func (db *InMemoryDatabase) Query(query string, args ...interface{}) (*map[interface{}]interface{}, error) {
-	return nil, errors.New("query operation not supported in in-memory database")
+	result := make(map[interface{}]interface{})
+	for k, v := range db.data {
+		result[k] = v
+	}
+	return &result, nil
 }
