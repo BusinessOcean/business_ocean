@@ -15,6 +15,8 @@ var ExampleModule = fx.Options(
 	fx.Provide(service.NewTodoService),
 	fx.Provide(repository.NewTodoRepository),
 	fx.Invoke(func(example *Example) {
-		example.RunExampleService()
+		go func() {
+			example.RunExampleService()
+		}()
 	}),
 )
