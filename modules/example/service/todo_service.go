@@ -1,7 +1,6 @@
 package service
 
 import (
-	"bedatabase"
 	"beservice/example/todo"
 	"bytes"
 	"context"
@@ -11,19 +10,18 @@ import (
 
 type TodoService struct {
 	repository repository.TodoRepository
-	db         bedatabase.BeDatabase
 	todo.UnimplementedTodoServiceServer
 }
 
-func NewTodoService(repository repository.TodoRepository, database bedatabase.BeDatabase) *TodoService {
+func NewTodoService(repository repository.TodoRepository) *TodoService {
 
-	return &TodoService{repository: repository, db: database}
+	return &TodoService{repository: repository}
 }
 
 // CreateTodo implements todo.TodoServiceServer.
 func (t *TodoService) CreateTodo(ctx context.Context, req *todo.CreateTodoRequest) (*todo.CreateTodoResponse, error) {
 
-	t.db.Insert(req)
+	t.repository.CreateTodo(todo.Todo{Title: req.Title, Description: req.Description})
 
 	return &todo.CreateTodoResponse{Todo: &todo.Todo{Title: req.Title, Id: 1827, Description: req.Description}}, nil
 }
@@ -36,11 +34,11 @@ func (t *TodoService) DeleteTodo(context.Context, *todo.DeleteTodoRequest) (*tod
 
 // ReadTodo implements todo.TodoServiceServer.
 func (t *TodoService) ReadTodo(context.Context, *todo.ReadTodoRequest) (*todo.ReadTodoResponse, error) {
-	result, err := t.db.Query("SELECT * FROM todo")
+	result, err := t.repository.GetTodos()
 	if err != nil {
 		return nil, err
 	}
-	return &todo.ReadTodoResponse{Todo: &todo.Todo{Title: createKeyValuePairs(*result)}}, nil
+	return &todo.ReadTodoResponse{Todo: &todo.Todo{Title: result.(string)}}, nil
 }
 
 // UpdateTodo implements todo.TodoServiceServer.

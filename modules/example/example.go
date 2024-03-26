@@ -1,10 +1,8 @@
 package example
 
 import (
-	"bedatabase"
 	"beservice/example/todo"
 	"context"
-	"example/repository"
 	"example/service"
 	"log"
 	"net"
@@ -15,12 +13,12 @@ import (
 // ExampleService starts a gRPC server.
 
 type Example struct {
-	database bedatabase.BeDatabase
+	service *service.TodoService
 }
 
 // new example service
-func NewExampleService(database bedatabase.BeDatabase) *Example {
-	return &Example{database: database}
+func NewExampleService(todoService *service.TodoService) *Example {
+	return &Example{service: todoService}
 }
 
 func (e Example) RunExampleService() {
@@ -28,14 +26,10 @@ func (e Example) RunExampleService() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	repo := repository.NewTodoRepository()
-
-	// Use the repository
-	todoService := service.NewTodoService(repo, e.database)
 
 	grpcOpts := GrpcInterceptor()
 	grpcServer := grpc.NewServer(grpcOpts)
-	todo.RegisterTodoServiceServer(grpcServer, todoService)
+	todo.RegisterTodoServiceServer(grpcServer, e.service)
 	// Use the service
 
 	err = grpcServer.Serve(listener)
