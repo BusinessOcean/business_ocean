@@ -12,7 +12,7 @@ use (
 	./betools
 	./betypes
 	./modules/auth
-	./modules/example
+	./modules/healthcheck
 	./modules/location
 	./modules/notifications
 	./modules/user

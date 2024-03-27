@@ -67,6 +67,11 @@ func GetSubCommands(becmd BeCommand) []*cobra.Command {
 // If any errors occur during the execution, they are logged using the logger.
 // Finally, the wrapped command is returned.
 func WrapSubCommand(name string, cmd Command, opt fx.Option) *cobra.Command {
+	// Wait for termination signal (SIGINT or SIGTERM)
+	// c := make(chan os.Signal, 1)
+	// signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	// <-c
+
 	wrappedCmd := &cobra.Command{
 		Use:   name,
 		Short: cmd.Short(),
@@ -91,6 +96,8 @@ func WrapSubCommand(name string, cmd Command, opt fx.Option) *cobra.Command {
 			if err != nil {
 				logger.Fatal(err)
 			}
+			// Wait for the application to shutdown
+			<-app.Done()
 		},
 	}
 	cmd.Setup(wrappedCmd)

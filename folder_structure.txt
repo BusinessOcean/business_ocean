@@ -4,30 +4,15 @@
 │   │   ├── openapi
 │   │   │   └── openapi.yaml
 │   │   └── swagger
-│   │       ├── example
-│   │       │   └── todo
-│   │       │       └── todo_service.swagger.json
 │   │       ├── google
-│   │       │   ├── api
-│   │       │   │   ├── annotations.swagger.json
-│   │       │   │   ├── field_behavior.swagger.json
-│   │       │   │   ├── httpbody.swagger.json
-│   │       │   │   └── http.swagger.json
-│   │       │   └── protobuf
-│   │       │       ├── any
-│   │       │       │   └── any.swagger.json
-│   │       │       ├── date
-│   │       │       │   └── timestamp.swagger.json
-│   │       │       ├── descriptor.swagger.json
-│   │       │       ├── duration
-│   │       │       │   └── duration.swagger.json
-│   │       │       ├── empty.swagger.json
-│   │       │       └── _timestamp.swagger.json
+│   │       │   └── api
+│   │       │       ├── annotations.swagger.json
+│   │       │       ├── field_behavior.swagger.json
+│   │       │       ├── httpbody.swagger.json
+│   │       │       └── http.swagger.json
 │   │       ├── location
 │   │       │   └── hello
 │   │       │       └── hello_service.swagger.json
-│   │       ├── todo
-│   │       │   └── todo_service.swagger.json
 │   │       └── validate
 │   │           ├── expression.swagger.json
 │   │           ├── priv
@@ -38,20 +23,19 @@
 │       ├── authentication
 │       ├── _buf.example
 │       ├── buf.yaml
-│       ├── example
-│       │   └── todo
-│       │       └── todo_service.proto
 │       ├── google
 │       │   └── api
 │       │       ├── annotations.proto
 │       │       ├── field_behavior.proto
 │       │       ├── httpbody.proto
 │       │       └── http.proto
+│       ├── healthcheck
 │       ├── location
 │       │   └── hello
 │       │       └── hello_service.proto
 │       ├── notifications
 │       ├── profile
+│       ├── user
 │       └── validate
 │           ├── expression.proto
 │           ├── priv
@@ -66,6 +50,8 @@
 │   ├── main.go
 │   └── module.go
 ├── becommon
+│   ├── bectx
+│   │   └── bectx.go
 │   ├── go.mod
 │   ├── go.sum
 │   └── modules.go
@@ -107,15 +93,14 @@
 │   └── modules.go
 ├── bedatabase
 │   ├── bedatabase.go
-│   └── go.mod
+│   ├── dgraph
+│   ├── go.mod
+│   ├── go.sum
+│   ├── memory
+│   │   └── inmemory.go
+│   ├── module.go
+│   └── redis
 ├── beservice
-│   ├── beservice.go
-│   ├── example
-│   │   └── todo
-│   │       ├── todo_service_grpc.pb.go
-│   │       ├── todo_service.pb.go
-│   │       ├── todo_service.pb.gw.go
-│   │       └── todo_service.pb.validate.go
 │   ├── go.mod
 │   ├── google
 │   │   └── api
@@ -158,6 +143,11 @@
 ├── buf.work.yaml
 ├── build
 │   └── bego
+├── cert
+│   ├── server.crt
+│   ├── server.key
+│   └── tmp
+│       └── build-errors.log
 ├── folder_structure.txt
 ├── go.work
 ├── go.work.sum
@@ -176,19 +166,25 @@
 │   │   │   └── repository.go
 │   │   └── routes
 │   │       └── routes.go
-│   ├── example
+│   ├── healthcheck
 │   │   ├── adapters
-│   │   │   └── adapters.go
+│   │   │   └── health_check_adapters.go
 │   │   ├── go.mod
+│   │   ├── go.sum
+│   │   ├── healthcheck.go
 │   │   ├── middlewares
 │   │   │   └── middlewares.go
 │   │   ├── models
 │   │   │   └── id.go
 │   │   ├── modules.go
 │   │   ├── repository
+│   │   │   ├── health_check_repository.go
 │   │   │   └── repository.go
-│   │   └── routes
-│   │       └── routes.go
+│   │   ├── routes
+│   │   │   ├── health_check_routes.go
+│   │   │   └── routes.go
+│   │   └── service
+│   │       └── health_check_service.go
 │   ├── location
 │   │   ├── adapters
 │   │   │   └── adapters.go
@@ -245,5 +241,6 @@
 │   └── logo
 │       └── businessocean.svg
 └── tmp
+    └── build-errors.log
 
-96 directories, 151 files
+94 directories, 150 files

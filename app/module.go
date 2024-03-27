@@ -1,15 +1,17 @@
 package main
 
 import (
+	"becommon/bectx"
 	"becore"
 	"bedatabase"
-	"example"
+	"healthcheck"
 
 	"go.uber.org/fx"
 )
 
 var AppModule = fx.Options(
+	fx.Provide(bectx.NewBeCtx),
 	becore.BecoreModule,
-	example.ExampleModule,
+	healthcheck.HealthCheckModules,
 	bedatabase.DatabaseModule,
 )

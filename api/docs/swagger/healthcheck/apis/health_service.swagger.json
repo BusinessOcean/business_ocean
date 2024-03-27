@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "healthcheck/apis/health_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "HealthCheckService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "apisCheckHealthServiceResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/apisCheckHealthServiceResponseStatus",
+          "description": "Status of the service."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional details or error messages can be included here."
+        }
+      },
+      "description": "HealthCheckResponse represents a response indicating the health status of a service."
+    },
+    "apisCheckHealthServiceResponseStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_UNSPECIFIED",
+        "STATUS_UNKNOWN",
+        "STATUS_HEALTHY",
+        "STATUS_UNHEALTHY"
+      ],
+      "default": "STATUS_UNSPECIFIED",
+      "description": "Status indicates the health status of the service.\n\n - STATUS_UNSPECIFIED: Health status unknown\n - STATUS_UNKNOWN: Health status unknown\n - STATUS_HEALTHY: Service is healthy\n - STATUS_UNHEALTHY: Service is unhealthy"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    }
+  }
+}

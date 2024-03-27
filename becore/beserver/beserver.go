@@ -15,7 +15,6 @@ type BeServer struct {
 type BeContext = iris.Context
 
 // type BeContext  iris.Context
-
 func NewBeServer(config *beconfig.Config) *BeServer {
 	_app := iris.New()
 	_app.SetName(config.AppName)
@@ -29,9 +28,4 @@ func NewBeServer(config *beconfig.Config) *BeServer {
 	_app.Use(crs)
 
 	return &BeServer{iris.New(), config.AppName}
-}
-
-func (b *BeServer) RegisterRoutes() {
-	// routes := ro.NewRoutes()
-	// _ = routes.Setup()
 }

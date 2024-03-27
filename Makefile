@@ -45,18 +45,20 @@ mod-sync:
 # ./scripts/gen-api-folder.sh beservice api/protobuf;
 
 proto-gen:
-	./scripts/gen-api-folder.sh features api/protobuf;
+	rm -rf beservice;
+	./scripts/gen-api-folder.sh modules api/protobuf;
 	buf generate;
+	cd beservice && go mod init beservice && go mod tidy;
 
-# Target: service-run
-# Description: Changes directory to ./beservice and runs the service_cmd.sh script.
-service-run:
-	cd ./beservice && ./service_cmd.sh;
+# # Target: service-run
+# # Description: Changes directory to ./beservice and runs the service_cmd.sh script.
+# service-run:
+# 	cd ./beservice && ./service_cmd.sh;
 
 # Target: feature-run
 # Description: Changes directory to ./features and runs the features_cmd.sh script.
 feature-run:
-	cd ./features && ./features_cmd.sh;
+	cd ./module && ./module_cmd.sh;
 
 # Target: mirror-folder
 # Description: Runs the mirror_folder.sh script to mirror folders for beservice and features.
