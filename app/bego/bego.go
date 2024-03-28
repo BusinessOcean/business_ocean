@@ -34,28 +34,17 @@ func (b *begoCommand) Run() command.CommandRunner {
 		bego *beserver.BeServer,
 		example *healthcheck.HealthAPI,
 		ctx bectx.BeCtx,
+		healthRoutes beroutes.BeRoute,
 	) {
 		logger.Info(`+-----------------------+`)
 		logger.Info(`| Bego App ARCHITECTURE |`)
 		logger.Info(`+-----------------------+`)
 		fmt.Println("Bego Server is running....")
 		routes := []beroutes.BeRoute{}
-		routes = append(routes, beroutes.NewBeRoute(bego, todos{}))
+		routes = append(routes, healthRoutes)
 		logger.Error("Bego Server is running....from beconsole")
 		beroutes.NewRegisterRouteAPI(routes)
 		bego.Run(iris.Addr(":8080"))
 
 	}
-}
-
-type todos struct {
-}
-
-// RegisterAPI implements beroutes.RegisterRouteAPI.
-func (t todos) RegisterAPI(server *beserver.BeServer) {
-	fmt.Println("Registering API")
-	server.Get("/todos", func(ctx beserver.BeContext) {
-		ctx.JSON([]string{"Write a blog post", "Write a book", "Write a song"})
-	})
-
 }

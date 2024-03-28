@@ -3,6 +3,7 @@ package healthcheck
 import (
 	"healthcheck/adapters"
 	"healthcheck/repository"
+	"healthcheck/routes"
 	"healthcheck/service"
 
 	"go.uber.org/fx"
@@ -13,6 +14,7 @@ var HealthCheckModules = fx.Options(
 	fx.Provide(adapters.NewHealthCheckAdapter),
 	fx.Provide(NewHealthCheckService),
 	fx.Provide(service.NewHealthCheckService),
+	fx.Provide(routes.NewHealthCheckRoute),
 	fx.Provide(repository.NewHealthCheckRepository),
 	fx.Invoke(func(service *HealthAPI) {
 		// go RunHealthCheckAPI(lifecycle, logger, service)
