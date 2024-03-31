@@ -13,6 +13,7 @@ import (
 var BecoreModule = fx.Options(
 	fx.Provide(belogger.NewBeLogger),
 	fx.Provide(beconfig.NewConfig),
-	fx.Provide(beserver.NewBeServer),
+	fx.Provide(beserver.NewBeHttpServer),
+	fx.Provide(beserver.NewBeGrpcServer),
 	fx.Provide(memory.NewInMemoryDatabase),
 )

@@ -7,7 +7,7 @@ import (
 	"github.com/kataras/iris/v12"
 )
 
-type BeServer struct {
+type BeHTTPServer struct {
 	*iris.Application
 	AppName string
 }
@@ -15,7 +15,7 @@ type BeServer struct {
 type BeContext = iris.Context
 
 // type BeContext  iris.Context
-func NewBeServer(config *beconfig.Config) *BeServer {
+func NewBeHttpServer(config *beconfig.Config) *BeHTTPServer {
 	_app := iris.New()
 	_app.SetName(config.AppName)
 	_app.Use(iris.Compression)
@@ -27,5 +27,5 @@ func NewBeServer(config *beconfig.Config) *BeServer {
 	})
 	_app.Use(crs)
 
-	return &BeServer{iris.New(), config.AppName}
+	return &BeHTTPServer{iris.New(), config.AppName}
 }

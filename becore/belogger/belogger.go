@@ -11,7 +11,7 @@ type BeLogger struct {
 }
 
 // NewBeLogger returns a new instance of BeLogger
-func NewBeLogger() *BeLogger {
+func NewBeLogger() BeLogger {
 	logger := golog.New()
 
 	// errorAttrs := golog.Levels[golog.ErrorLevel]
@@ -23,5 +23,5 @@ func NewBeLogger() *BeLogger {
 	// // Get (rich) text per log level.
 	// enableColors := true
 	// errorRichText := errorAttrs.Text(enableColors)
-	return &BeLogger{Logger: logger}
+	return BeLogger{Logger: logger}
 }

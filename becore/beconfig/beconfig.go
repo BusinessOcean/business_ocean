@@ -16,7 +16,7 @@ type Config struct {
 }
 
 // NewConfig returns a new instance of ServerConfig
-func NewConfig(logger *belogger.BeLogger) *Config {
+func NewConfig(logger belogger.BeLogger) *Config {
 
 	viper.SetConfigFile(".env")
 

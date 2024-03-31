@@ -1,64 +1,68 @@
 package healthcheck
 
 import (
+	"becommon/bedomain"
+	"becore/beroutes"
+	"becore/beserver"
 	"beservice/healthcheck/apis"
-	"context"
-	"fmt"
 	"healthcheck/service"
 	"log"
 	"net"
 
-	"google.golang.org/grpc"
+	"github.com/kataras/iris/v12"
 )
 
-// ExampleService starts a gRPC server.
+var _ bedomain.IBeDomainModule = (*BeHealthCheckDomain)(nil)
 
-type HealthAPI struct {
+type BeHealthCheckDomain struct {
+	*bedomain.BaseDomainModule
 	service *service.HealthCheckService
+	routes  []beroutes.IRegisterRouteAPI
 }
 
-// new healthcheck service
-func NewHealthCheckService(service *service.HealthCheckService) *HealthAPI {
-	return &HealthAPI{service: service}
+func NewBeHealthCheckDomain(
+	baseDomainModule *bedomain.BaseDomainModule,
+	service *service.HealthCheckService,
+	routes []beroutes.IRegisterRouteAPI,
+) bedomain.IBeDomainModule {
+	return &BeHealthCheckDomain{
+		baseDomainModule,
+		service,
+		routes,
+	}
 }
 
-func (e HealthAPI) RunHealthCheckService() {
+func (app *BeHealthCheckDomain) Run() error {
+
+	go app.RunGRPCServer(*app.GetConfig(), app.GetGrpcServer())
+	go app.RunHTTPServer(*app.GetConfig(), app.GetHTTPServer())
+
+	return nil
+}
+
+func (app *BeHealthCheckDomain) RunGRPCServer(bedomain.BeDomainConfig, *beserver.BeGrpcServer) error {
+	app.GetLogger().Errorf("Run GRPCServer is not implemented")
+
+	beroutes.NewRegisterRouteAPI(app.GetHTTPServer(), app.routes)
+
+	app.GetHTTPServer().Run(iris.Addr(":8080"))
+	return nil
+}
+
+func (app *BeHealthCheckDomain) RunHTTPServer(bedomain.BeDomainConfig, *beserver.BeHTTPServer) error {
+
+	app.GetLogger().Errorf("Run HTTPServer is not implemented")
+
 	listener, err := net.Listen("tcp", "localhost:8081")
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	grpcOpts := GrpcInterceptor()
-	grpcServer := grpc.NewServer(grpcOpts)
-	apis.RegisterHealthCheckServiceServer(grpcServer, e.service)
+	apis.RegisterHealthCheckServiceServer(app.GetGrpcServer(), app.service)
 	// Use the service
 
-	err = grpcServer.Serve(listener)
+	err = app.GetGrpcServer().Serve(listener)
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-}
-func (e HealthAPI) StopHealthCheckService() {
-	fmt.Println("Stopping Example Service application...")
-}
-
-func GrpcInterceptor() grpc.ServerOption {
-	grpcServerOptions := grpc.UnaryInterceptor(
-		func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler,
-		) (resp interface{}, err error) {
-			if v, ok := req.(validatable); ok {
-				err := v.Validate()
-				if err != nil {
-					return nil, err
-				}
-			}
-			_, _ = handler(ctx, req)
-			return handler(ctx, req)
-		})
-	return grpcServerOptions
-}
-
-type validatable interface {
-	Validate() error
+	return nil
 }
