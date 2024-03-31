@@ -28,9 +28,7 @@ func (b *begoCommand) Run() command.CommandRunner {
 
 		for _, domain := range domains {
 			domain.Bootstrap()
-			go func() {
-				domain.Run()
-			}()
+			domain.Run()
 		}
 
 		// domainModules.Bootstrap()
