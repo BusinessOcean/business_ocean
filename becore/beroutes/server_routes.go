@@ -4,28 +4,14 @@ import (
 	"becore/beserver"
 )
 
-// Routes contains multiple routes
-type BeRoute struct {
-	*beserver.BeServer
-	RegisterRouteAPI
-}
-
-func NewBeRoute(server *beserver.BeServer, route RegisterRouteAPI) BeRoute {
-	return BeRoute{server, route}
-}
-
 // Route interface
-type RegisterRouteAPI interface {
-	RegisterAPI(*beserver.BeServer)
+type IRegisterRouteAPI interface {
+	RegisterAPI(*beserver.BeHTTPServer)
 }
 
 // NewRoutes sets up routes
-func NewRegisterRouteAPI(routes []BeRoute) []RegisterRouteAPI {
-	var convertedRoutes []RegisterRouteAPI
-
+func NewRegisterRouteAPI(server *beserver.BeHTTPServer, routes []IRegisterRouteAPI) {
 	for _, route := range routes {
-		route.RegisterAPI(route.BeServer)
-		convertedRoutes = append(convertedRoutes, route)
+		route.RegisterAPI(server)
 	}
-	return convertedRoutes
 }

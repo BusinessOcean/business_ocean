@@ -1,15 +1,8 @@
 package bego
 
 import (
-	"becommon/bectx"
 	"beconsole/command"
-	"becore/belogger"
-	"becore/beroutes"
-	"becore/beserver"
-	"fmt"
-	"healthcheck"
 
-	"github.com/kataras/iris/v12"
 	"github.com/spf13/cobra"
 )
 
@@ -30,21 +23,16 @@ func (b *begoCommand) Setup(cmd *cobra.Command) error {
 
 func (b *begoCommand) Run() command.CommandRunner {
 	return func(
-		logger *belogger.BeLogger,
-		bego *beserver.BeServer,
-		example *healthcheck.HealthAPI,
-		ctx bectx.BeCtx,
-		healthRoutes beroutes.BeRoute,
+		domains BegoDomains,
 	) {
-		logger.Info(`+-----------------------+`)
-		logger.Info(`| Bego App ARCHITECTURE |`)
-		logger.Info(`+-----------------------+`)
-		fmt.Println("Bego Server is running....")
-		routes := []beroutes.BeRoute{}
-		routes = append(routes, healthRoutes)
-		logger.Error("Bego Server is running....from beconsole")
-		beroutes.NewRegisterRouteAPI(routes)
-		bego.Run(iris.Addr(":8080"))
 
+		for _, domain := range domains {
+			domain.Bootstrap()
+			go func() {
+				domain.Run()
+			}()
+		}
+
+		// domainModules.Bootstrap()
 	}
 }
