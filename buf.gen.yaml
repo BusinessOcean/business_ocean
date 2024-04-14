@@ -9,7 +9,8 @@ managed:
     default: beservice # <module_name>/<relative_path>
     except:
       - buf.build/googleapis/googleapis
-      # - buf.build/bufbuild/protovalidate
+      - buf.build/bufbuild/protovalidate
+
 
 plugins:
 
