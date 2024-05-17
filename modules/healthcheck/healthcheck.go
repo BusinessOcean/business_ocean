@@ -34,8 +34,8 @@ func NewBeHealthCheckDomain(
 
 func (app *BeHealthCheckDomain) Run() error {
 
-	go app.RunGRPCServer(*app.GetConfig(), app.GetGrpcServer())
-	go app.RunHTTPServer(*app.GetConfig(), app.GetHTTPServer())
+	go app.RunGRPCServer(app.GetConfig(), app.GetGrpcServer())
+	go app.RunHTTPServer(app.GetConfig(), app.GetHTTPServer())
 
 	return nil
 }
@@ -61,6 +61,7 @@ func (app *BeHealthCheckDomain) RunHTTPServer(bedomain.BeDomainConfig, *beserver
 	// Use the service
 
 	err = app.GetGrpcServer().Serve(listener)
+
 	if err != nil {
 		log.Fatalln(err)
 	}
