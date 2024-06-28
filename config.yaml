@@ -1,0 +1,18 @@
+dgraph:
+  host: "localhost:9080"
+
+postgres:
+  host: "localhost"
+  port: 5433
+  user: "user"
+  password: "password"
+  dbname: "dbname"
+
+jwt:
+  secret: "your_jwt_secret"
+
+cloud:
+  secret: "your_cloud_secret"
+
+common:
+  some_other_secret: "your_other_secret"
