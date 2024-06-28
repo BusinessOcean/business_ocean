@@ -137,7 +137,7 @@ func TestHookTriggerStopPropagation(t *testing.T) {
 	f3 := func(data int) error { called3 = true; return nil }
 
 	called4 := false
-	f4 := func(data int) error { called4 = true; return StopPropagation }
+	f4 := func(data int) error { called4 = true; return ErrStopPropagation }
 
 	called5 := false
 	f5 := func(data int) error { called5 = true; return nil }

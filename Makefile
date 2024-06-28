@@ -1,5 +1,5 @@
-include .env
-export
+# include config.yaml
+# export
 # Target: run
 # Description: Runs the main.go file using the 'go run' command.
 run:
