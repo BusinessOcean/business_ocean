@@ -1,7 +1,7 @@
 package bedomain
 
 import (
-	"becommon/beevents"
+	"becommon/beevent"
 	"becore/behook"
 )
 
@@ -14,10 +14,10 @@ type IBeDomainModule interface {
 	Run() error
 	// ResetBootstrapState() error
 	// Restart() error
-	OnBeforeBootstrap() *behook.Hook[*beevents.ExampleHookEvent]
+	OnBeforeBootstrap() *behook.Hook[*beevent.ExampleHookEvent]
 	// OnAfterBootstrap() *behook.Hook[*ExampleHookEvent]
 	// OnBeforeServe() *behook.Hook[*ExampleHookEvent]
 	// OnBeforeApiError() *behook.Hook[*ExampleHookEvent]
 	// OnAfterApiError() *behook.Hook[*ExampleHookEvent]
-	OnTerminate() *behook.Hook[*beevents.ExampleHookEvent]
+	OnTerminate() *behook.Hook[*beevent.ExampleHookEvent]
 }

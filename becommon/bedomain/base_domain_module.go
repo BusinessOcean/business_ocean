@@ -1,7 +1,7 @@
 package bedomain
 
 import (
-	"becommon/beevents"
+	"becommon/beevent"
 	"becore/behook"
 	"becore/belogger"
 	"becore/beserver"
@@ -47,17 +47,17 @@ func (app *BaseDomainModule) Run() error {
 	panic("implement Run in Domain Module")
 }
 
-func (app *BaseDomainModule) OnBeforeBootstrap() *behook.Hook[*beevents.ExampleHookEvent] {
+func (app *BaseDomainModule) OnBeforeBootstrap() *behook.Hook[*beevent.ExampleHookEvent] {
 	return nil
 }
 
-func (app *BaseDomainModule) OnTerminate() *behook.Hook[*beevents.ExampleHookEvent] {
+func (app *BaseDomainModule) OnTerminate() *behook.Hook[*beevent.ExampleHookEvent] {
 	return nil
 }
 
 // LoadConfig implements IBaseDomainModule.
 func (app *BaseDomainModule) LoadConfig() (*BeDomainConfig, error) {
-	app.logger.Errorf("LoadConfig is not implemented")
+	app.logger.Errorf("TODO:LoadConfig is not implemented")
 
 	config := BeDomainConfig{Port: "8080", DomainName: "localhost"}
 
@@ -80,6 +80,6 @@ func (app *BaseDomainModule) GetLogger() belogger.BeLogger {
 }
 
 // GetLogger returns the logger variable.
-func (app *BaseDomainModule) GetConfig() *BeDomainConfig {
-	return app.config
+func (app *BaseDomainModule) GetConfig() BeDomainConfig {
+	return *app.config
 }

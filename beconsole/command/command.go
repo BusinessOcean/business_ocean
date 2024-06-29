@@ -85,7 +85,8 @@ func WrapSubCommand(name string, cmd Command, opt fx.Option) *cobra.Command {
 				fx.Invoke(cmd.Run()),
 			)
 			ctx := context.Background()
-			app := fx.New(opt, opts)
+			//  Hide uber fx logs : fx.NopLogger
+			app := fx.New(opt, opts, fx.NopLogger)
 			err := app.Start(ctx)
 			defer func() {
 				err = app.Stop(ctx)

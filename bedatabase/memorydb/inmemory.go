@@ -1,35 +1,41 @@
-package memory
+package memorydb
 
 import (
 	"errors"
 	"sync"
 )
 
-// InMemoryDatabase is an in-memory key-value database.
-type InMemoryDatabase struct {
+// InMemoryDB is an in-memory key-value database.
+type InMemoryDB struct {
 	data map[int]interface{}
 	mu   sync.RWMutex
 }
 
-// NewInMemoryDatabase creates a new instance of InMemoryDatabase.
-func NewInMemoryDatabase() *InMemoryDatabase {
-	return &InMemoryDatabase{
+// NewInMemoryDB creates a new instance of InMemoryDB.
+func NewInMemoryDB() *InMemoryDB {
+	return &InMemoryDB{
 		data: make(map[int]interface{}),
 	}
 }
 
 // Connect connects to the in-memory database (no operation for in-memory implementation).
-func (db *InMemoryDatabase) Connect() error {
+func (db *InMemoryDB) Connect() error {
+	return nil
+}
+
+
+// Connect connects to the in-memory database (no operation for in-memory implementation).
+func (db *InMemoryDB) Ping() error {
 	return nil
 }
 
 // Disconnect disconnects from the in-memory database (no operation for in-memory implementation).
-func (db *InMemoryDatabase) Disconnect() error {
+func (db *InMemoryDB) Disconnect() error {
 	return nil
 }
 
 // Insert inserts data into the in-memory database.
-func (db *InMemoryDatabase) Insert(data interface{}) error {
+func (db *InMemoryDB) Insert(data interface{}) error {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 	id := len(db.data) + 1
@@ -38,7 +44,7 @@ func (db *InMemoryDatabase) Insert(data interface{}) error {
 }
 
 // Update updates data in the in-memory database.
-func (db *InMemoryDatabase) Update(id int, data interface{}) error {
+func (db *InMemoryDB) Update(id int, data interface{}) error {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 	if _, exists := db.data[id]; !exists {
@@ -49,7 +55,7 @@ func (db *InMemoryDatabase) Update(id int, data interface{}) error {
 }
 
 // Delete deletes data from the in-memory database.
-func (db *InMemoryDatabase) Delete(id int) error {
+func (db *InMemoryDB) Delete(id int) error {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 	if _, exists := db.data[id]; !exists {
@@ -60,7 +66,7 @@ func (db *InMemoryDatabase) Delete(id int) error {
 }
 
 // Query performs a query on the in-memory database (no operation for in-memory implementation).
-func (db *InMemoryDatabase) Query(query string, args ...interface{}) (*map[interface{}]interface{}, error) {
+func (db *InMemoryDB) Query(query string, args ...interface{}) (*map[interface{}]interface{}, error) {
 	result := make(map[interface{}]interface{})
 	for k, v := range db.data {
 		result[k] = v
