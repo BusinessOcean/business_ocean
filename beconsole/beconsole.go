@@ -32,18 +32,18 @@ var _rootConsole = &cobra.Command{
 	TraverseChildren: true,
 }
 
-type BusinessOceanConsole struct {
+type BeConsole struct {
 	*cobra.Command
 }
 
-// NewBOConsole returns a new instance of BeConsole
-func NewBOConsole(beCommands []command.BeCommand) BusinessOceanConsole {
-	bc := BusinessOceanConsole{
+// NewBeConsole returns a new instance of BeConsole
+func NewBeConsole(beCommands []command.BeCommand) BeConsole {
+	bc := BeConsole{
 		Command: _rootConsole,
 	}
 
-	for _, v := range beCommands {
-		bc.AddCommand(command.GetSubCommands(v)...)
+	for _, cmd := range beCommands {
+		bc.AddCommand(command.GetSubCommands(cmd)...)
 	}
 	return bc
 }

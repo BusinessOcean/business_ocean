@@ -1,6 +1,6 @@
 package bebase
 
-type BootstrapFacade interface {
+type IBootstrap interface {
 	// RefreshSettings() error
 	// IsBootstrapped() bool
 	Bootstrap() error
@@ -11,14 +11,14 @@ type BootstrapFacade interface {
 	// OnBeforeServe()     //*hook.Hook[*ServeEvent]
 	// OnBeforeApiError()  //*hook.Hook[*ApiErrorEvent]
 	// OnAfterApiError()   //*hook.Hook[*ApiErrorEvent]
-	OnTerminate() //*hook.Hook[*TerminateEvent]
+	OnTerminate() error //*hook.Hook[*TerminateEvent]
 }
 
-type ConfigsFacade interface {
+type IConfigs interface {
 	IsDev() bool
 }
 
-type SettingAndBackupFacade interface {
+type ISettingAndBackup interface {
 	// NewFilesystem() (*filesystem.System, error)
 	// NewBackupsFilesystem() (*filesystem.System, error)
 	// CreateBackup(ctx context.Context, name string) error
@@ -29,7 +29,7 @@ type SettingAndBackupFacade interface {
 
 }
 
-type AdminFacade interface {
+type IAdmin interface {
 	// OnAdminsListRequest()                      //*hook.Hook[*AdminsListEvent]
 	// OnAdminViewRequest()                       //*hook.Hook[*AdminViewEvent]
 	// OnAdminBeforeCreateRequest()               //*hook.Hook[*AdminCreateEvent]
@@ -50,7 +50,7 @@ type AdminFacade interface {
 
 }
 
-type RealtimeFacade interface {
+type IRealtime interface {
 	// OnRealtimeConnectRequest() *hook.Hook[*RealtimeConnectEvent]
 	// OnRealtimeDisconnectRequest() *hook.Hook[*RealtimeDisconnectEvent]
 	// OnRealtimeBeforeMessageSend() *hook.Hook[*RealtimeMessageEvent]

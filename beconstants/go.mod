@@ -1,3 +1,3 @@
-module beconstants
+module beconst
 
-go 1.22
+go 1.23.3

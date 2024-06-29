@@ -3,6 +3,7 @@ package main
 import (
 	"becommon"
 	"becommon/bectx"
+	"becommon/fxutil"
 	"becore"
 	"bedatabase"
 	"businessocean/bego"
@@ -12,15 +13,12 @@ import (
 )
 
 var AppModule = fx.Options(
-	fx.Provide(bectx.NewBeCtx),
-	becommon.BeCommonModule,
 	becore.BecoreModule,
+	fxutil.AnnotatedProvide(bectx.NewBeCtx, `name:"bectx"`),
+	fxutil.AnnotatedProvide(bectx.NewBeAppCtx, `name:"beappctx"`),
+	becommon.BeCommonModule,
 	bedatabase.DatabaseModule,
+	fx.Provide(bego.NewBegoApp),
+	fx.Provide(bego.NewBegoCommand),
 	healthcheck.HealthCheckModules,
-	fx.Provide(
-		fx.Annotate(
-			bego.NewBegoDomains,
-			fx.ParamTags(`group:"bego"`),
-		),
-	),
 )

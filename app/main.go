@@ -10,11 +10,11 @@ func main() {
 	appCmd := []command.BeCommand{}
 
 	var cmds = command.CmdSlice{
-		"bego": bego.NewBegoServer(),
+		"bego": bego.NewBegoCommand(),
 	}
-	// Bego service for microservice
+	// run Bego App Command
 	appCmd = append(appCmd, command.NewCommand(cmds, AppModule))
 
-	var businessocean = beconsole.NewBOConsole(appCmd)
+	var businessocean = beconsole.NewBeConsole(appCmd)
 	businessocean.Execute()
 }

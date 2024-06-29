@@ -3,6 +3,7 @@ package command
 import (
 	"betools"
 	"context"
+	"fmt"
 
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"
@@ -85,9 +86,11 @@ func WrapSubCommand(name string, cmd Command, opt fx.Option) *cobra.Command {
 				fx.Invoke(cmd.Run()),
 			)
 			ctx := context.Background()
-			app := fx.New(opt, opts)
+			//  Hide uber fx logs : fx.NopLogger
+			app := fx.New(opt, opts, fx.NopLogger)
 			err := app.Start(ctx)
 			defer func() {
+				fmt.Println("Stopping the application")
 				err = app.Stop(ctx)
 				if err != nil {
 					logger.Fatal(err)

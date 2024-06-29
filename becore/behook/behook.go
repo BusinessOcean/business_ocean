@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-var StopPropagation = errors.New("Event hook propagation stopped")
+var ErrStopPropagation = errors.New("event hook propagation stopped")
 
 // Handler defines a hook handler function.
 type Handler[T any] func(e T) error
@@ -110,7 +110,7 @@ func (h *Hook[T]) Trigger(data T, oneOffHandlers ...Handler[T]) error {
 			continue
 		}
 
-		if errors.Is(err, StopPropagation) {
+		if errors.Is(err, ErrStopPropagation) {
 			return nil
 		}
 

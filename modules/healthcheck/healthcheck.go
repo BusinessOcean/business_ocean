@@ -3,66 +3,78 @@ package healthcheck
 import (
 	"becommon/bedomain"
 	"becore/beroutes"
-	"becore/beserver"
-	"beservice/healthcheck/apis"
 	"healthcheck/service"
-	"log"
-	"net"
 
-	"github.com/kataras/iris/v12"
+	"go.uber.org/fx"
 )
 
-var _ bedomain.IBeDomainModule = (*BeHealthCheckDomain)(nil)
+var _ bedomain.IBeDomain = (*BeHealthCheckDomain)(nil)
+
+type DomainParams struct {
+	fx.In
+
+	BaseModules *bedomain.BaseDomain `name:"domain"`
+	Service     *service.HealthCheckService
+	Routes      []beroutes.IRegisterRouteAPI
+}
 
 type BeHealthCheckDomain struct {
-	*bedomain.BaseDomainModule
+	*bedomain.BaseDomain
 	service *service.HealthCheckService
 	routes  []beroutes.IRegisterRouteAPI
 }
 
-func NewBeHealthCheckDomain(
-	baseDomainModule *bedomain.BaseDomainModule,
-	service *service.HealthCheckService,
-	routes []beroutes.IRegisterRouteAPI,
-) bedomain.IBeDomainModule {
+func NewBeHealthCheckDomain(params DomainParams) *BeHealthCheckDomain {
 	return &BeHealthCheckDomain{
-		baseDomainModule,
-		service,
-		routes,
+		BaseDomain: params.BaseModules,
+		service:    params.Service,
+		routes:     params.Routes,
 	}
 }
 
-func (app *BeHealthCheckDomain) Run() error {
+// func (d *BeHealthCheckDomain) Register(interface{}) error {
+// 	return nil
+// }
 
-	go app.RunGRPCServer(*app.GetConfig(), app.GetGrpcServer())
-	go app.RunHTTPServer(*app.GetConfig(), app.GetHTTPServer())
+// func (d *BeHealthCheckDomain) Setup() error {
+// 	// d.GetServer().Register("healthcheck.apis.HealthCheckService", d.service)
+// 	// apis.HealthCheckAPI(d.service)
+// 	// fmt.Println("HealthCheckDomain setups")
+// 	// apis.RegisterHealthCheckServiceServer(d.GetServer().GetGrpcServer(), d.service)
 
-	return nil
-}
+// 	return nil
+// }
 
-func (app *BeHealthCheckDomain) RunGRPCServer(bedomain.BeDomainConfig, *beserver.BeGrpcServer) error {
-	app.GetLogger().Errorf("Run GRPCServer is not implemented")
+// func (d *BeHealthCheckDomain) Run() error {
+// 	app := iris.New()
+// 	app.Logger().SetLevel("debug")
 
-	beroutes.NewRegisterRouteAPI(app.GetHTTPServer(), app.routes)
+// 	app.Get("/", func(ctx iris.Context) {
+// 		ctx.HTML("<h1>Index Page</h1>")
+// 	})
 
-	app.GetHTTPServer().Run(iris.Addr(":8080"))
-	return nil
-}
+// 	// Register gRPC server.
+// 	// grpcServer := d.GetServer().GetGrpcServer()
+// 	// apis.RegisterHealthCheckServiceServer(grpcServer, d.service)
 
-func (app *BeHealthCheckDomain) RunHTTPServer(bedomain.BeDomainConfig, *beserver.BeHTTPServer) error {
+// 	serviceName := apis.File_healthcheck_apis_health_service_proto.Services().Get(0).FullName()
+// 	fmt.Println("Service Name: --->", serviceName)
 
-	app.GetLogger().Errorf("Run HTTPServer is not implemented")
+// 	// Register MVC application controller for gRPC services.
+// 	// You can bind as many mvc gRpc services in the same Party or app,
+// 	// as the ServiceName differs.
+// 	mvc.New(app).
+// 		Register(d.service).
+// 		Handle(d.service, mvc.GRPC{
+// 			Server:      d.GetServer().GetGrpcServer(),
+// 			ServiceName: string(serviceName),
+// 			Strict:      false,
+// 		})
 
-	listener, err := net.Listen("tcp", "localhost:8081")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	apis.RegisterHealthCheckServiceServer(app.GetGrpcServer(), app.service)
-	// Use the service
-
-	err = app.GetGrpcServer().Serve(listener)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	return nil
-}
+// 	err := app.Run(iris.TLS(":50051", "./cert/server.crt", "./cert/server.key"))
+// 	if err != nil {
+// 		app.Logger().Errorf("Failed to run HTTP server: %v", err)
+// 		return err
+// 	}
+// 	return nil
+// }

@@ -12,20 +12,22 @@ type BeHTTPServer struct {
 	AppName string
 }
 
-type BeContext = iris.Context
-
 // type BeContext  iris.Context
-func NewBeHttpServer(config *beconfig.Config) *BeHTTPServer {
-	_app := iris.New()
-	_app.SetName(config.AppName)
-	_app.Use(iris.Compression)
-	_app.Favicon("./static/favicons/businessocean.ico")
+func NewBeHttpServer(config *beconfig.AppConfig) *BeHTTPServer {
 
-	crs := cors.New(cors.Options{
+	server := &BeHTTPServer{iris.New(), config.Info.AppName}
+	server.Logger().SetLevel("debug")
+	server.SetName(config.Info.AppName)
+	server.Use(iris.Compression)
+	server.Favicon("./static/favicons/businessocean.ico")
+	corsOpt := cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
-	})
-	_app.Use(crs)
+	}
 
-	return &BeHTTPServer{iris.New(), config.AppName}
+	crs := cors.New(corsOpt)
+	server.Use(crs)
+
+	return server
+
 }

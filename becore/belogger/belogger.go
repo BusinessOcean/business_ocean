@@ -5,23 +5,16 @@ import (
 )
 
 // BeLogger is the interface for the logger
-
 type BeLogger struct {
 	*golog.Logger
 }
 
+// TODO: Customize logger in the future https://github.com/kataras/golog/blob/master/_examples/customize-levels/new-level/main.go
 // NewBeLogger returns a new instance of BeLogger
-func NewBeLogger() BeLogger {
-	logger := golog.New()
+func NewBeLogger() *BeLogger {
+	belogger := BeLogger{golog.New()}
+	belogger.SetTimeFormat("2006-01-02 15:04:05")
+	belogger.SetLevel("debug")
 
-	// errorAttrs := golog.Levels[golog.ErrorLevel]
-
-	// // Change a log level's text.
-	// customColorCode := 156
-	// errorAttrs.SetText("custom text", customColorCode)
-
-	// // Get (rich) text per log level.
-	// enableColors := true
-	// errorRichText := errorAttrs.Text(enableColors)
-	return BeLogger{Logger: logger}
+	return &belogger
 }

@@ -1,7 +1,10 @@
 package healthcheck
 
 import (
-	"becommon/bedomain"
+	"becommon/fxutil"
+	"becore/belogger"
+	"beservice/healthcheck/apis"
+	"context"
 	"healthcheck/adapters"
 	"healthcheck/repository"
 	"healthcheck/routes"
@@ -10,19 +13,34 @@ import (
 	"go.uber.org/fx"
 )
 
-// const HEALTH_ROUTES_TAG = `health_routes`
+type HealthCheckDomainParams struct {
+	fx.In
+	Lifecycle   fx.Lifecycle
+	Logger      *belogger.BeLogger
+	HealthCheck *BeHealthCheckDomain `name:"healthcheck"`
+}
 
-// Service is a function that starts a gRPC server.
 var HealthCheckModules = fx.Options(
 	fx.Provide(repository.NewHealthCheckRepository),
 	fx.Provide(adapters.NewHealthCheckAdapter),
 	fx.Provide(service.NewHealthCheckService),
 	fx.Provide(routes.NewHealthCheckRoutes),
-	fx.Provide(
-		fx.Annotate(
-			NewBeHealthCheckDomain,
-			fx.As(new(bedomain.IBeDomainModule)),
-			fx.ResultTags(`group:"bego"`),
-		),
-	),
+	fxutil.AnnotatedProvide(NewBeHealthCheckDomain, `name:"healthcheck"`),
+	fx.Invoke(func(domain HealthCheckDomainParams) {
+		// Lifecycle hooks
+		domain.Lifecycle.Append(fx.Hook{
+			OnStart: func(ctx context.Context) error {
+				domain.Logger.Info("HealthCheckModules started")
+				domain.HealthCheck.Setup()
+				domain.HealthCheck.Register(apis.HealthCheckService_ServiceDesc, domain.HealthCheck.service)
+				domain.HealthCheck.Run()
+				return nil
+			},
+			OnStop: func(ctx context.Context) error {
+				domain.Logger.Info("HealthCheckModules stopped")
+				return domain.HealthCheck.OnTerminate()
+
+			},
+		})
+	}),
 )

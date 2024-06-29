@@ -1,0 +1,23 @@
+info:
+  app_name: "business ocean"
+  app_version: "v0.0.1" # released app version
+  build_version: "v1"
+  mode: "development" # development, production, staging
+  
+dgraph:
+  host: "localhost:9080"
+
+postgres:
+  host: "localhost"
+  port: 5433
+  user: "user"
+  password: "password"
+  dbname: "dbname"
+
+jwt:
+  secret: "your_jwt_secret"
+
+cloud:
+  secret: "your_cloud_secret"
+
+

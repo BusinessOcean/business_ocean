@@ -9,7 +9,7 @@ import (
 type begoCommand struct{}
 
 // NewBego returns a new instance of Bego
-func NewBegoServer() *begoCommand {
+func NewBegoCommand() *begoCommand {
 	return &begoCommand{}
 }
 
@@ -22,14 +22,21 @@ func (b *begoCommand) Setup(cmd *cobra.Command) error {
 }
 
 func (b *begoCommand) Run() command.CommandRunner {
-	return func(
-		domains BegoDomains,
-	) {
+	return func(app *BegoApp) {
 
-		for _, domain := range domains {
-			domain.Bootstrap()
-			domain.Run()
-		}
+		// fmt.Println("Bego is runnings", app.BeCtx, app.BeAppCtx)
+		// fmt.Println("Bego is runnings")
+		// fmt.Printf("Config: %v\n", &app.BaseApp)
+		// app.logger.Info("Bego is running with logger")
+		app.Bootstrap()
+		app.IsDev()
+		// app.Logger.Info("Bego is running with logger")
+
+		// logger.Print("Bego is running with logger")
+		// // for _, domain := range domains {
+		// domain.Bootstrap()
+		// domain.Run()
+		// }
 
 		// domainModules.Bootstrap()
 	}

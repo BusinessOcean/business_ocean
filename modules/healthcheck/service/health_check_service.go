@@ -16,8 +16,8 @@ func NewHealthCheckService(repository repository.HealthCheckRepository) *HealthC
 	return &HealthCheckService{repository: repository}
 }
 
-func (hc HealthCheckService) CheckHealthService(ctx context.Context, req *apis.CheckHealthServiceRequest) (res *apis.CheckHealthServiceResponse, error error) {
+func (hc HealthCheckService) CheckHealthService(context.Context, *apis.CheckHealthServiceRequest) (*apis.CheckHealthServiceResponse, error) {
 	// status.Errorf(codes.Unimplemented, "method CheckHealthService not implemented")
 
-	return &apis.CheckHealthServiceResponse{Status: apis.CheckHealthServiceResponse_STATUS_HEALTHY, Message: "Health check Service is running"}, nil
+	return &apis.CheckHealthServiceResponse{Status: apis.CheckHealthServiceResponse_STATUS_HEALTHY, Message: "Health check Service is runnings"}, nil
 }

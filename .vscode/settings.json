@@ -35,4 +35,5 @@
         ".vscode/settings.json"
     ], 
     "cSpell.diagnosticLevel": "Hint",
+    "svg.preview.background": "custom",
 }

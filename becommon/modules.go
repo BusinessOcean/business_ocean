@@ -2,10 +2,11 @@ package becommon
 
 import (
 	"becommon/bedomain"
+	"becommon/fxutil"
 
 	"go.uber.org/fx"
 )
 
 var BeCommonModule = fx.Options(
-	fx.Provide(bedomain.NewBaseDomainModule),
+	fxutil.AnnotatedProvide(bedomain.NewBaseDomain, `name:"domain"`),
 )
