@@ -2,6 +2,8 @@ package dgraphdb
 
 import (
 	"beconst"
+	"becore/belogger"
+	"bedatabase/db"
 	"context"
 	"fmt"
 
@@ -14,18 +16,22 @@ import (
 //         API_TOKEN_CLIENT :  YjM3YzcyZDI3YjJmMTM3ODNjZjMzZmYzNmQwNTRlOWI=
 //         API_TOKEN_ADMIN  :  M2YwY2E3OGVhNTQ3YzI0YTA3YTliYThmZDdjZDRlZjU=
 
+var _ db.IBeDatabase = (*BeDgraphDB)(nil)
+
 // BeDgraphDB is an in-memory key-value database.
 type BeDgraphDB struct {
 	*dgo.Dgraph
+	logger *belogger.BeLogger
 }
 
 // NewBeDgraphDB creates a new instance of BeDgraphDB.
-func NewBeDgraphDB() *BeDgraphDB {
-	return &BeDgraphDB{}
+func NewBeDgraphDB(logger *belogger.BeLogger) *BeDgraphDB {
+	return &BeDgraphDB{logger: logger}
 }
 
 // Connect connects to the in-memory database (no operation for in-memory implementation).
 func (db *BeDgraphDB) Connect() error {
+	db.logger.Info("Connecting to DgraphDB...")
 
 	conn, err := dgo.DialCloud(beconst.DGRAPH_GRAPHQL_ENDPOINT, beconst.DGRAPH_ADMIN_API_TOKEN)
 	// Check error

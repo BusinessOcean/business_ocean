@@ -1,19 +1,27 @@
 package adapters
 
 import (
-	"bedatabase"
+	"bedatabase/dgraphdb"
+
+	"go.uber.org/fx"
 )
+
+type healthCheckAdapter struct {
+	*dgraphdb.BeDgraphDB
+}
 
 type HealthCheckAdapter interface {
 	GetDatabaseConnectionStatus(id string)
 }
 
-func NewHealthCheckAdapter(db bedatabase.BeDatabase) HealthCheckAdapter {
-	return healthCheckAdapter{db}
+type HealthCheckAdapterParam struct {
+	fx.In
+
+	DgraphDB *dgraphdb.BeDgraphDB `name:"dgraphdb"`
 }
 
-type healthCheckAdapter struct {
-	bedatabase.BeDatabase
+func NewHealthCheckAdapter(p HealthCheckAdapterParam) HealthCheckAdapter {
+	return healthCheckAdapter{p.DgraphDB}
 }
 
 func (e healthCheckAdapter) GetDatabaseConnectionStatus(id string) {

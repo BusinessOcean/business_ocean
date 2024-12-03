@@ -1,6 +1,7 @@
 package bedatabase
 
 import (
+	"becommon/fxutil"
 	"bedatabase/dgraphdb"
 	"bedatabase/memorydb"
 	"context"
@@ -9,24 +10,31 @@ import (
 	"go.uber.org/fx"
 )
 
-var DatabaseModule = fx.Options(
-	fx.Provide(memorydb.NewInMemoryDB),
-	fx.Provide(dgraphdb.NewBeDgraphDB),
-	fx.Provide(fx.Annotate(dgraphdb.NewBeDgraphDB, fx.As(new(BeDatabase)))),
+type DatabaseModuleParams struct {
+	fx.In
+	Lifecycle  fx.Lifecycle
+	BeDgraphDB *dgraphdb.BeDgraphDB `name:"dgraphdb"`
+	InMemoryDB *memorydb.InMemoryDB `name:"memorydb"`
+}
+
+var DatabaseModules = fx.Options(
+	fxutil.AnnotatedProvide(dgraphdb.NewBeDgraphDB, `name:"dgraphdb"`),
+	fxutil.AnnotatedProvide(memorydb.NewInMemoryDB, `name:"memorydb"`),
 	fx.Invoke(registerGraphDBHooks),
 )
 
-func registerGraphDBHooks(lc fx.Lifecycle, graphDB *dgraphdb.BeDgraphDB) {
-	lc.Append(fx.Hook{
+func registerGraphDBHooks(param DatabaseModuleParams) {
+	param.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			fmt.Println("Connecting to BeDgraphDB...")
-			graphDB.Connect()
+			param.BeDgraphDB.Connect()
+			param.InMemoryDB.Connect()
 			// graphDB.Ping()
 			return nil
 		},
 		OnStop: func(ctx context.Context) error {
 			fmt.Println("Disconnecting from BeDgraphDB...")
-			graphDB.Disconnect()
+			param.BeDgraphDB.Disconnect()
 			return nil
 		},
 	})

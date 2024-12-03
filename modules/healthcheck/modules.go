@@ -13,7 +13,7 @@ import (
 	"go.uber.org/fx"
 )
 
-type HealthCheckDomainParams struct {
+type HealthCheckModuleParams struct {
 	fx.In
 	Lifecycle   fx.Lifecycle
 	Logger      *belogger.BeLogger
@@ -29,7 +29,7 @@ var HealthCheckModules = fx.Options(
 	fx.Invoke(registerLifecycleHooks),
 )
 
-func registerLifecycleHooks(params HealthCheckDomainParams) {
+func registerLifecycleHooks(params HealthCheckModuleParams) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting HealthCheckModules...")
@@ -37,6 +37,10 @@ func registerLifecycleHooks(params HealthCheckDomainParams) {
 			params.HealthCheck.Register(
 				healthcheck.HealthCheckService_ServiceDesc,
 				params.HealthCheck.service,
+			)
+			params.HealthCheck.RegisterRoutes(
+				healthcheck.HealthCheckService_ServiceDesc,
+				params.HealthCheck.routes,
 			)
 			params.HealthCheck.Run()
 			// handle and return error here

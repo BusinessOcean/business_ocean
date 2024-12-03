@@ -1,7 +1,7 @@
 package bedomain
 
 import (
-	"becore/beserver"
+	"becore/beroutes"
 
 	"google.golang.org/grpc"
 )
@@ -11,7 +11,7 @@ type BeDomainName string
 type IBeDomain interface {
 	Setup() error
 	Register(grpc.ServiceDesc, interface{}) error
-	GetServer() *beserver.BegoServer
+	RegisterRoutes(grpc.ServiceDesc, []*beroutes.Route) error
 	Run() error
 	OnTerminate() error
 }

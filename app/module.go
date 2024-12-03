@@ -17,7 +17,7 @@ var AppModule = fx.Options(
 	fxutil.AnnotatedProvide(bectx.NewBeCtx, `name:"bectx"`),
 	fxutil.AnnotatedProvide(bectx.NewBeAppCtx, `name:"beappctx"`),
 	becommon.BeCommonModule,
-	bedatabase.DatabaseModule,
+	bedatabase.DatabaseModules,
 	fx.Provide(bego.NewBegoApp),
 	fx.Provide(bego.NewBegoCommand),
 	healthcheck.HealthCheckModules,

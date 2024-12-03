@@ -1,9 +1,7 @@
-package bedatabase
-
-import "bedatabase/memorydb"
+package db
 
 // DatabaseInterface defines the methods that a database interface must implement.
-type BeDatabase interface {
+type IBeDatabase interface {
 	Connect() error
 	Ping() error
 	Disconnect() error
@@ -12,10 +10,3 @@ type BeDatabase interface {
 	Delete(id int) error
 	Query(query string, args ...interface{}) (*map[interface{}]interface{}, error)
 }
-
-var _ BeDatabase = &memorydb.InMemoryDB{}
-
-// // NewInMemoryDatabase creates a new instance of InMemoryDatabase.
-// func NewInMemoryDatabase() BeDatabase {
-// 	return memorydb.NewInMemoryDB()
-// }

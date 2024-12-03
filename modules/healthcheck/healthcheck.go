@@ -15,13 +15,14 @@ type DomainParams struct {
 
 	BaseModules *bedomain.BaseDomain `name:"domain"`
 	Service     *service.HealthCheckService
-	Routes      []beroutes.IRegisterRouteAPI
+	Routes      []*beroutes.Route
 }
 
 type BeHealthCheckDomain struct {
 	*bedomain.BaseDomain
+
 	service *service.HealthCheckService
-	routes  []beroutes.IRegisterRouteAPI
+	routes  []*beroutes.Route
 }
 
 func NewBeHealthCheckDomain(params DomainParams) *BeHealthCheckDomain {

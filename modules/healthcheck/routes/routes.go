@@ -2,11 +2,15 @@ package routes
 
 import (
 	"becore/beroutes"
-	"becore/beserver"
+	"healthcheck/service"
+
+	"github.com/kataras/iris/v12"
 )
 
-func NewHealthCheckRoutes(server *beserver.BeHTTPServer) []beroutes.IRegisterRouteAPI {
-	return []beroutes.IRegisterRouteAPI{
-		&healthCheck{},
-	}
+func NewHealthCheckRoutes(service *service.HealthCheckService) []*beroutes.Route {
+
+	healthRoute := beroutes.NewRoutes(iris.MethodGet, "/health", service.HealthCheckApiRoute)
+	routes := []*beroutes.Route{healthRoute}
+
+	return routes
 }

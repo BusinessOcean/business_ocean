@@ -1,6 +1,7 @@
 package beserver
 
 import (
+	"becore/beroutes"
 	"betypes/beerrors"
 	"fmt"
 
@@ -24,6 +25,26 @@ func NewBegoServer(
 		grpc: grpc,
 	}
 	return &server
+}
+
+func (s *BegoServer) RegisterRoutes(group string, routes []*beroutes.Route) error {
+
+	fmt.Println("Registering routes for group: ----->", group)
+	fmt.Println("Registering routes for group: ----->", routes)
+
+	party := s.http.Party(group)
+	for _, route := range routes {
+		// Apply middlewares if present
+		if len(route.Middlewares) > 0 {
+			party.Use(route.Middlewares...)
+		}
+		// Register the route
+		party.Handle(route.Method, route.Path, route.Handler)
+		fmt.Println("Registering route: ---->", route.Path)
+	}
+
+	return nil
+
 }
 
 func (s *BegoServer) Register(desc grpc.ServiceDesc, handler interface{}) error {
@@ -55,14 +76,10 @@ func (s *BegoServer) GetGrpcServer() *BeGRPCServer {
 	return s.grpc
 }
 func (s *BegoServer) RunServer() error {
-
-	// run http server
-	// s.http.Run(iris.TLS(":2525", "./cert/server.crt", "./cert/server.key"))
 	err := s.http.Run(iris.TLS(":50051", "./cert/server.crt", "./cert/server.key"))
 	if err != nil {
 		s.http.Logger().Errorf("Failed to run HTTP server: %v", err)
 		return err
 	}
-	s.http.Logger().Infof("HTTP server is running on port 50051")
 	return nil
 }

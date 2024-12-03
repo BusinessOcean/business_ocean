@@ -4,6 +4,8 @@ import (
 	"beservice/healthcheck/apis"
 	"context"
 	"healthcheck/repository"
+
+	"github.com/kataras/iris/v12"
 )
 
 type HealthCheckService struct {
@@ -17,7 +19,10 @@ func NewHealthCheckService(repository repository.HealthCheckRepository) *HealthC
 }
 
 func (hc HealthCheckService) CheckHealthService(context.Context, *apis.CheckHealthServiceRequest) (*apis.CheckHealthServiceResponse, error) {
-	// status.Errorf(codes.Unimplemented, "method CheckHealthService not implemented")
 
-	return &apis.CheckHealthServiceResponse{Status: apis.CheckHealthServiceResponse_STATUS_HEALTHY, Message: "Health check Service is runnings"}, nil
+	return &apis.CheckHealthServiceResponse{Status: apis.CheckHealthServiceResponse_STATUS_HEALTHY, Message: "Health check Service is running"}, nil
+}
+
+func (hc HealthCheckService) HealthCheckApiRoute(ctx iris.Context) {
+	ctx.JSON(iris.Map{"status": "HealthCheckApiRoute"})
 }

@@ -2,6 +2,7 @@ package bedomain
 
 import (
 	"becore/belogger"
+	"becore/beroutes"
 	"becore/beserver"
 
 	"google.golang.org/grpc"
@@ -45,6 +46,11 @@ func (d *BaseDomain) GetServer() *beserver.BegoServer {
 func (d *BaseDomain) Register(desc grpc.ServiceDesc, service interface{}) error {
 	d.server.Register(desc, service)
 
+	return nil
+}
+
+func (d *BaseDomain) RegisterRoutes(desc grpc.ServiceDesc, routes []*beroutes.Route) error {
+	d.server.RegisterRoutes(desc.ServiceName, routes)
 	return nil
 }
 

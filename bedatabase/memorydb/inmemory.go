@@ -1,28 +1,36 @@
 package memorydb
 
 import (
+	"becore/belogger"
+	"bedatabase/db"
 	"errors"
 	"sync"
 )
 
+var _ db.IBeDatabase = (*InMemoryDB)(nil)
+
 // InMemoryDB is an in-memory key-value database.
 type InMemoryDB struct {
-	data map[int]interface{}
-	mu   sync.RWMutex
+	db.IBeDatabase
+	logger *belogger.BeLogger
+	data   map[int]interface{}
+	mu     sync.RWMutex
 }
 
 // NewInMemoryDB creates a new instance of InMemoryDB.
-func NewInMemoryDB() *InMemoryDB {
+func NewInMemoryDB(logger *belogger.BeLogger) *InMemoryDB {
 	return &InMemoryDB{
-		data: make(map[int]interface{}),
+		logger: logger,
+		data:   make(map[int]interface{}),
 	}
 }
 
 // Connect connects to the in-memory database (no operation for in-memory implementation).
 func (db *InMemoryDB) Connect() error {
+	db.logger.Info("Connecting to in-memory database...")
+
 	return nil
 }
-
 
 // Connect connects to the in-memory database (no operation for in-memory implementation).
 func (db *InMemoryDB) Ping() error {
