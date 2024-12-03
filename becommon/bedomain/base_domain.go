@@ -43,20 +43,16 @@ func (d *BaseDomain) GetServer() *beserver.BegoServer {
 }
 
 func (d *BaseDomain) Register(desc grpc.ServiceDesc, service interface{}) error {
-
 	d.server.Register(desc, service)
 
 	return nil
 }
 
 func (d *BaseDomain) Run() error {
-	// d.logger.Infof("Running %s", d.)
 	d.server.RunServer()
-
 	return nil
 }
 
 func (d *BaseDomain) OnTerminate() error {
-	// d.logger.Infof("Terminating %s", d.OnTerminate())
 	return nil
 }

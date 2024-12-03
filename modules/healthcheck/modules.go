@@ -3,7 +3,7 @@ package healthcheck
 import (
 	"becommon/fxutil"
 	"becore/belogger"
-	"beservice/healthcheck/apis"
+	healthcheck "beservice/healthcheck/apis"
 	"context"
 	"healthcheck/adapters"
 	"healthcheck/repository"
@@ -26,21 +26,25 @@ var HealthCheckModules = fx.Options(
 	fx.Provide(service.NewHealthCheckService),
 	fx.Provide(routes.NewHealthCheckRoutes),
 	fxutil.AnnotatedProvide(NewBeHealthCheckDomain, `name:"healthcheck"`),
-	fx.Invoke(func(domain HealthCheckDomainParams) {
-		// Lifecycle hooks
-		domain.Lifecycle.Append(fx.Hook{
-			OnStart: func(ctx context.Context) error {
-				domain.Logger.Info("HealthCheckModules started")
-				domain.HealthCheck.Setup()
-				domain.HealthCheck.Register(apis.HealthCheckService_ServiceDesc, domain.HealthCheck.service)
-				domain.HealthCheck.Run()
-				return nil
-			},
-			OnStop: func(ctx context.Context) error {
-				domain.Logger.Info("HealthCheckModules stopped")
-				return domain.HealthCheck.OnTerminate()
-
-			},
-		})
-	}),
+	fx.Invoke(registerLifecycleHooks),
 )
+
+func registerLifecycleHooks(params HealthCheckDomainParams) {
+	params.Lifecycle.Append(fx.Hook{
+		OnStart: func(ctx context.Context) error {
+			params.Logger.Info("Starting HealthCheckModules...")
+			params.HealthCheck.Setup()
+			params.HealthCheck.Register(
+				healthcheck.HealthCheckService_ServiceDesc,
+				params.HealthCheck.service,
+			)
+			params.HealthCheck.Run()
+			// handle and return error here
+			return nil
+		},
+		OnStop: func(ctx context.Context) error {
+			params.Logger.Info("Stopping HealthCheckModules...")
+			return params.HealthCheck.OnTerminate()
+		},
+	})
+}

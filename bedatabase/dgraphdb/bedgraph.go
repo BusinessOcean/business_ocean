@@ -3,6 +3,7 @@ package dgraphdb
 import (
 	"beconst"
 	"context"
+	"fmt"
 
 	"github.com/dgraph-io/dgo/v230"
 	"github.com/dgraph-io/dgo/v230/protos/api"
@@ -40,6 +41,8 @@ func (db *BeDgraphDB) Connect() error {
 
 // Connect connects to the in-memory database (no operation for in-memory implementation).
 func (db *BeDgraphDB) Ping() error {
+	err := db.Ping()
+	fmt.Println("Ping DgraphDB", err)
 	return nil
 }
 
