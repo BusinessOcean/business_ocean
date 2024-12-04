@@ -29,9 +29,6 @@ func NewBegoServer(
 
 func (s *BegoServer) RegisterRoutes(group string, routes []*beroutes.Route) error {
 
-	fmt.Println("Registering routes for group: ----->", group)
-	fmt.Println("Registering routes for group: ----->", routes)
-
 	party := s.http.Party(group)
 	for _, route := range routes {
 		// Apply middlewares if present

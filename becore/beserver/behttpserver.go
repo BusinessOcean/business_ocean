@@ -20,9 +20,9 @@ func NewBeHttpServer(config *beconfig.AppConfig) *BeHTTPServer {
 	server.SetName(config.Info.AppName)
 	server.Use(iris.Compression)
 	server.Favicon("./static/favicons/businessocean.ico")
-	// TODO: handle content
-	server.Get("/", func(ctx iris.Context) {
-		ctx.HTML("<h1>Home Index Page</h1>")
+	server.HandleDir("/", iris.Dir("./public"), iris.DirOptions{
+		IndexName: "index.html",
+		SPA:       true,
 	})
 	corsOpt := cors.Options{
 		AllowedOrigins:   []string{"*"},
