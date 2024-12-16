@@ -1,6 +1,6 @@
 module beservice
 
-go 1.23.3
+go 1.23.4
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.24.0

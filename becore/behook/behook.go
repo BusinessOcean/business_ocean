@@ -1,7 +1,7 @@
 package behook
 
 import (
-	"becommon/begenerator"
+	"becommon/begenerate"
 	"errors"
 	"fmt"
 	"sync"
@@ -121,5 +121,5 @@ func (h *Hook[T]) Trigger(data T, oneOffHandlers ...Handler[T]) error {
 }
 
 func generateHookId() string {
-	return begenerator.PseudoIdString(8)
+	return begenerate.PseudoIdString(8)
 }

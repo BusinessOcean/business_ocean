@@ -1,6 +1,6 @@
 module becore
 
-go 1.23.3
+go 1.23.4
 
 require (
 	github.com/iris-contrib/middleware/cors v0.0.0-20240926134003-a252b7a49da9

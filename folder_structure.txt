@@ -244,3 +244,348 @@
     └── build-errors.log
 
 94 directories, 150 files
+.
+├── api
+│   ├── docs
+│   │   ├── openapi
+│   │   │   └── openapi.yaml
+│   │   └── swagger
+│   │       ├── google
+│   │       │   └── api
+│   │       │       ├── annotations.swagger.json
+│   │       │       ├── field_behavior.swagger.json
+│   │       │       ├── httpbody.swagger.json
+│   │       │       └── http.swagger.json
+│   │       ├── healthcheck
+│   │       │   └── apis
+│   │       │       └── health_service.swagger.json
+│   │       ├── location
+│   │       │   └── hello
+│   │       │       └── hello_service.swagger.json
+│   │       └── validate
+│   │           ├── expression.swagger.json
+│   │           ├── priv
+│   │           │   └── private.swagger.json
+│   │           └── validate.swagger.json
+│   └── protobuf
+│       ├── auth
+│       ├── _buf.example
+│       ├── buf.lock
+│       ├── buf.yaml
+│       ├── google
+│       │   └── api
+│       │       ├── annotations.proto
+│       │       ├── field_behavior.proto
+│       │       ├── httpbody.proto
+│       │       └── http.proto
+│       ├── healthcheck
+│       │   └── apis
+│       │       └── health_service.proto
+│       ├── location
+│       │   └── hello
+│       │       └── hello_service.proto
+│       ├── notifications
+│       ├── user
+│       └── validate
+│           ├── expression.proto
+│           ├── priv
+│           │   └── private.proto
+│           └── validate.proto
+├── app
+│   ├── bego
+│   │   ├── app.go
+│   │   └── bego.go
+│   ├── go.mod
+│   ├── go.sum
+│   ├── main.go
+│   └── module.go
+├── becommon
+│   ├── bectx
+│   │   └── bectx.go
+│   ├── bedomain
+│   │   ├── base_domain.go
+│   │   ├── bedomain_config.go
+│   │   └── bedomain.go
+│   ├── beevent
+│   │   └── beevent.go
+│   ├── begenerate
+│   │   └── pseudo_id.go
+│   ├── bestore
+│   │   ├── store.go
+│   │   └── store_test.go
+│   ├── fxutil
+│   │   └── util.go
+│   ├── go.mod
+│   ├── go.sum
+│   └── modules.go
+├── beconsole
+│   ├── beconsole.go
+│   ├── command
+│   │   └── command.go
+│   ├── go.mod
+│   ├── go.sum
+│   └── modules.go
+├── beconstants
+│   ├── constants.go
+│   ├── errors.go
+│   └── go.mod
+├── becore
+│   ├── base_app.go
+│   ├── bebase
+│   │   └── ibego_app.go
+│   ├── beconfig
+│   │   └── beconfig.go
+│   ├── bego_app.go
+│   ├── behook
+│   │   ├── behook.go
+│   │   └── behook_test.go
+│   ├── belogger
+│   │   ├── belogger.go
+│   │   └── modules.go
+│   ├── beroutes
+│   │   └── beroutes.go
+│   ├── beserver
+│   │   ├── begrpcserver.go
+│   │   ├── behttpserver.go
+│   │   ├── beserver.go
+│   │   └── helper.go
+│   ├── go.mod
+│   ├── go.sum
+│   ├── infrastructure
+│   │   ├── bucket.go
+│   │   ├── db.go
+│   │   ├── firebase.go
+│   │   ├── gmail.go
+│   │   ├── infrastructure.go
+│   │   └── migration.go
+│   └── modules.go
+├── bedatabase
+│   ├── db
+│   │   └── bedatabase.go
+│   ├── dgraphdb
+│   │   └── bedgraph.go
+│   ├── go.mod
+│   ├── go.sum
+│   ├── memorydb
+│   │   └── inmemory.go
+│   └── module.go
+├── beservice
+│   ├── go.mod
+│   ├── google
+│   │   └── api
+│   │       ├── annotations.pb.go
+│   │       ├── annotations.pb.validate.go
+│   │       ├── field_behavior.pb.go
+│   │       ├── field_behavior.pb.validate.go
+│   │       ├── httpbody.pb.go
+│   │       ├── httpbody.pb.validate.go
+│   │       ├── http.pb.go
+│   │       └── http.pb.validate.go
+│   ├── go.sum
+│   ├── healthcheck
+│   │   └── apis
+│   │       ├── health_service_grpc.pb.go
+│   │       ├── health_service.pb.go
+│   │       ├── health_service.pb.gw.go
+│   │       └── health_service.pb.validate.go
+│   ├── location
+│   │   └── hello
+│   │       ├── hello_service_grpc.pb.go
+│   │       ├── hello_service.pb.go
+│   │       ├── hello_service.pb.gw.go
+│   │       └── hello_service.pb.validate.go
+│   └── validate
+│       ├── expression.pb.go
+│       ├── expression.pb.validate.go
+│       ├── priv
+│       │   ├── private.pb.go
+│       │   └── private.pb.validate.go
+│       ├── validate.pb.go
+│       └── validate.pb.validate.go
+├── betools
+│   ├── filesystem
+│   │   └── filesystem.go
+│   ├── go.mod
+│   └── go.sum
+├── betypes
+│   ├── beerror
+│   │   └── beerror.go
+│   ├── go.mod
+│   └── modules.go
+├── buf.gen.yaml
+├── buf.lock
+├── buf.work.yaml
+├── build
+│   └── bego
+├── cert
+│   ├── openssl.cnf
+│   ├── ReadMe.md
+│   ├── server.crt
+│   ├── server.csr
+│   ├── server.key
+│   └── tmp
+│       └── build-errors.log
+├── config.yaml
+├── folder_structure.txt
+├── go.work
+├── go.work.sum
+├── LICENSE
+├── Makefile
+├── modules
+│   ├── auth
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   ├── healthcheck
+│   │   ├── adapters
+│   │   │   └── health_check_adapters.go
+│   │   ├── go.mod
+│   │   ├── go.sum
+│   │   ├── healthcheck.go
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── modules.go
+│   │   ├── repository
+│   │   │   ├── health_check_repository.go
+│   │   │   └── repository.go
+│   │   ├── routes
+│   │   │   ├── health_check_routes.go
+│   │   │   └── routes.go
+│   │   └── service
+│   │       └── health_check_service.go
+│   ├── location
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── modules.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   ├── modules_cmd.sh
+│   ├── notifications
+│   │   ├── adapters
+│   │   │   └── adapters.go
+│   │   ├── go.mod
+│   │   ├── middlewares
+│   │   │   └── middlewares.go
+│   │   ├── models
+│   │   │   └── id.go
+│   │   ├── repository
+│   │   │   └── repository.go
+│   │   └── routes
+│   │       └── routes.go
+│   └── user
+│       ├── adapters
+│       │   └── adapters.go
+│       ├── go.mod
+│       ├── middlewares
+│       │   └── middlewares.go
+│       ├── models
+│       │   └── id.go
+│       ├── repository
+│       │   └── repository.go
+│       └── routes
+│           └── routes.go
+├── public
+│   ├── assets
+│   │   ├── AssetManifest.bin
+│   │   ├── AssetManifest.bin.json
+│   │   ├── AssetManifest.json
+│   │   ├── assets
+│   │   │   ├── image
+│   │   │   │   ├── bg_abstract.jpeg
+│   │   │   │   ├── header_bg_1.jpg
+│   │   │   │   ├── header_bg_2.jpg
+│   │   │   │   └── header_bg_3.jpg
+│   │   │   ├── logo
+│   │   │   │   └── bego_logo.png
+│   │   │   └── svg
+│   │   │       ├── bego_icon.svg
+│   │   │       ├── blob_1.svg
+│   │   │       ├── blob_2.svg
+│   │   │       ├── blob_3.svg
+│   │   │       ├── business_ocean.svg
+│   │   │       ├── google_logo.svg
+│   │   │       └── stacked_waves.svg
+│   │   ├── FontManifest.json
+│   │   ├── fonts
+│   │   │   └── MaterialIcons-Regular.otf
+│   │   ├── NOTICES
+│   │   ├── packages
+│   │   │   ├── bego_app
+│   │   │   │   └── assets
+│   │   │   │       └── images
+│   │   │   │           └── working_illustration.png
+│   │   │   └── bego_ui
+│   │   │       └── assets
+│   │   │           ├── fonts
+│   │   │           │   ├── ReadexPro-Bold.ttf
+│   │   │           │   ├── ReadexPro-ExtraLight.ttf
+│   │   │           │   ├── ReadexPro-Light.ttf
+│   │   │           │   ├── ReadexPro-Medium.ttf
+│   │   │           │   ├── ReadexPro-Regular.ttf
+│   │   │           │   └── ReadexPro-SemiBold.ttf
+│   │   │           └── icons
+│   │   │               └── BegoIcons.ttf
+│   │   └── shaders
+│   │       └── ink_sparkle.frag
+│   ├── canvaskit
+│   │   ├── canvaskit.js
+│   │   ├── canvaskit.js.symbols
+│   │   ├── canvaskit.wasm
+│   │   ├── chromium
+│   │   │   ├── canvaskit.js
+│   │   │   ├── canvaskit.js.symbols
+│   │   │   └── canvaskit.wasm
+│   │   ├── skwasm.js
+│   │   ├── skwasm.js.symbols
+│   │   ├── skwasm.wasm
+│   │   └── skwasm.worker.js
+│   ├── favicon.png
+│   ├── flutter_bootstrap.js
+│   ├── flutter.js
+│   ├── flutter_service_worker.js
+│   ├── icons
+│   │   ├── Icon-192.png
+│   │   ├── Icon-512.png
+│   │   ├── Icon-maskable-192.png
+│   │   └── Icon-maskable-512.png
+│   ├── index.html
+│   ├── main.dart.js
+│   ├── manifest.json
+│   └── version.json
+├── ReadMe.md
+├── scripts
+│   ├── cleanup.sh
+│   ├── copy_common_proto.sh
+│   ├── gen-api-folder.sh
+│   ├── go_mod_add.sh
+│   ├── go_mod_tidy.sh
+│   ├── go_run_parallel.sh
+│   ├── mirror_folder.sh
+│   ├── run_linter.sh
+│   └── upgrade_go_mods.sh
+├── static
+│   ├── favicons
+│   │   └── businessocean.ico
+│   └── logo
+│       └── businessocean.svg
+└── tmp
+    └── build-errors.log
+
+121 directories, 222 files

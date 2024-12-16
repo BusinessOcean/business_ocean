@@ -2,7 +2,7 @@ package beserver
 
 import (
 	"becore/beroutes"
-	"betypes/beerrors"
+	"betypes/beerror"
 	"fmt"
 
 	"github.com/kataras/iris/v12"
@@ -47,7 +47,7 @@ func (s *BegoServer) RegisterRoutes(group string, routes []*beroutes.Route) erro
 func (s *BegoServer) Register(desc grpc.ServiceDesc, handler interface{}) error {
 	// return error if interface is nil
 	if handler == nil {
-		return beerrors.ErrRegisterNilHandler
+		return beerror.ErrRegisterNilHandler
 	}
 
 	fmt.Println("Registering service: ", desc.ServiceName)

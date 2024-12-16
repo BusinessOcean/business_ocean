@@ -1,6 +1,6 @@
 module becommon
 
-go 1.23.3
+go 1.23.4
 
 require (
 	go.uber.org/fx v1.23.0

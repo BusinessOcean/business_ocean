@@ -1,4 +1,4 @@
-package begenerator
+package begenerate
 
 import (
 	"crypto/rand"

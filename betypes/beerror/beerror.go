@@ -1,4 +1,4 @@
-package beerrors
+package beerror
 
 import (
 	"beconst"

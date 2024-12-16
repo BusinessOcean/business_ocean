@@ -1,7 +1,7 @@
 package command
 
 import (
-	"betools"
+	"becore/belogger"
 	"context"
 	"fmt"
 
@@ -78,7 +78,7 @@ func WrapSubCommand(name string, cmd Command, opt fx.Option) *cobra.Command {
 		Short: cmd.Short(),
 		Run: func(c *cobra.Command, args []string) {
 			// TODO: Use the logger from betools
-			logger := betools.NewLogger()
+			logger := belogger.NewBeLogger()
 
 			opts := fx.Options(
 				// TAKE CARE: Need to use the logger from betools
