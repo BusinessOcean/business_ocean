@@ -74,6 +74,8 @@ proto-clone:
 update-folder-structure:
 	tree >> folder_structure.txt;  
 
+firebase-emulator:
+	firebase emulators:start;
 
 
 # PHONY targets
