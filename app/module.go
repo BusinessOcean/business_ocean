@@ -1,13 +1,13 @@
 package main
 
 import (
+	"auth"
 	"becommon"
 	"becommon/bectx"
 	"becommon/fxutil"
 	"becore"
 	"bedatabase"
 	"businessocean/bego"
-	"healthcheck"
 
 	"go.uber.org/fx"
 )
@@ -20,5 +20,6 @@ var AppModule = fx.Options(
 	bedatabase.DatabaseModules,
 	fx.Provide(bego.NewBegoApp),
 	fx.Provide(bego.NewBegoCommand),
-	healthcheck.HealthCheckModules,
+	// healthcheck.HealthCheckModules,
+	auth.AuthModules,
 )
