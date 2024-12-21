@@ -1,8 +1,10 @@
 package main
 
 import (
+	"auth"
 	"becommon"
 	"becommon/bectx"
+	"becommon/bedomain"
 	"becommon/fxutil"
 	"becore"
 	"bedatabase"
@@ -18,7 +20,11 @@ var AppModule = fx.Options(
 	fxutil.AnnotatedProvide(bectx.NewBeAppCtx, `name:"beappctx"`),
 	becommon.BeCommonModule,
 	bedatabase.DatabaseModules,
+	fx.Provide(bedomain.NewBaseDomain),
 	fx.Provide(bego.NewBegoApp),
 	fx.Provide(bego.NewBegoCommand),
 	healthcheck.HealthCheckModules,
+	auth.AuthModules,
+	fx.Invoke(healthcheck.RegisterHealthCheckLifecycleHooks),
+	fx.Invoke(auth.RegisterAuthLifecycleHooks),
 )

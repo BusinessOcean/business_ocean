@@ -14,7 +14,7 @@ func NewBegoCommand() *begoCommand {
 }
 
 func (b *begoCommand) Short() string {
-	return " Run Bego Server "
+	return "Run Bego Server "
 }
 
 func (b *begoCommand) Setup(cmd *cobra.Command) error {
@@ -30,6 +30,7 @@ func (b *begoCommand) Run() command.CommandRunner {
 		// app.logger.Info("Bego is running with logger")
 		app.Bootstrap()
 		app.IsDev()
+		// app.Run()
 		// app.Logger.Info("Bego is running with logger")
 
 		// logger.Print("Bego is running with logger")

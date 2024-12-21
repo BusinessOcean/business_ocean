@@ -9,4 +9,6 @@ import (
 
 var BeCommonModule = fx.Options(
 	fxutil.AnnotatedProvide(bedomain.NewBaseDomain, `name:"domain"`),
+	// fxutil.AnnotatedProvide(healthcheck.NewBeHealthCheckDomain, `name:"healthcheckdomain"`),
+	// fxutil.AnnotatedProvide(auth.NewBeHealthCheckDomain, `name:"authdomain"`),
 )

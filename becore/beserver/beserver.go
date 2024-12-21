@@ -51,7 +51,6 @@ func (s *BegoServer) Register(desc grpc.ServiceDesc, handler interface{}) error 
 	}
 
 	fmt.Println("Registering service: ", desc.ServiceName)
-	fmt.Println("Handler: ", handler)
 
 	s.grpc.RegisterService(&desc, handler)
 	appServer := mvc.New(s.http)

@@ -2,7 +2,6 @@ package healthcheck
 
 import (
 	"becommon/bedomain"
-	"becore/beroutes"
 	"healthcheck/service"
 
 	"go.uber.org/fx"
@@ -15,20 +14,17 @@ type DomainParams struct {
 
 	BaseModules *bedomain.BaseDomain `name:"domain"`
 	Service     *service.HealthCheckService
-	Routes      []*beroutes.Route
 }
 
 type BeHealthCheckDomain struct {
 	*bedomain.BaseDomain
 
 	service *service.HealthCheckService
-	routes  []*beroutes.Route
 }
 
 func NewBeHealthCheckDomain(params DomainParams) *BeHealthCheckDomain {
 	return &BeHealthCheckDomain{
 		BaseDomain: params.BaseModules,
 		service:    params.Service,
-		routes:     params.Routes,
 	}
 }

@@ -41,6 +41,10 @@ func (app *BaseApp) OnTerminate() error {
 
 	return nil
 }
+func (app *BaseApp) Run() error {
+	app.server.RunServer()
+	return nil
+}
 
 func (app *BaseApp) IsDev() bool {
 	if app.config.Info.Mode == "development" {
