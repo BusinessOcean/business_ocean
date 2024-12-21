@@ -4,13 +4,15 @@ import (
 	"becore/beroutes"
 	"healthcheck/service"
 
+	firebase "firebase.google.com/go/v4"
 	"github.com/kataras/iris/v12"
 )
 
-func NewHealthCheckRoutes(service *service.HealthCheckService) []*beroutes.Route {
+func NewHealthCheckRoutes(service *service.HealthCheckService, fbApp *firebase.App) []*beroutes.Route {
 
 	healthRoute := beroutes.NewRoutes(iris.MethodGet, "/health", service.HealthCheckApiRoute)
-	routes := []*beroutes.Route{healthRoute}
+	healthRoute2 := beroutes.NewRoutes(iris.MethodGet, "/health1", service.HealthCheckApiRoute2)
+	routes := []*beroutes.Route{healthRoute, healthRoute2}
 
 	return routes
 }

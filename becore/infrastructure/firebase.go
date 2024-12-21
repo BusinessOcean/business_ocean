@@ -1,67 +1,69 @@
 package infrastructure
 
-// import (
-// 	"context"
-// 	"path/filepath"
+import (
+	"becore/belogger"
+	"context"
+	"path/filepath"
 
-// 	"cloud.google.com/go/firestore"
-// 	firebase "firebase.google.com/go"
-// 	"firebase.google.com/go/auth"
-// 	"firebase.google.com/go/messaging"
-// 	"google.golang.org/api/option"
-// )
+	"cloud.google.com/go/firestore"
+	firebase "firebase.google.com/go/v4"
+	"firebase.google.com/go/v4/auth"
+	"firebase.google.com/go/v4/messaging"
+	"google.golang.org/api/option"
+)
 
-// // NewFBApp creates new firebase app instance
-// func NewFBApp(logger lib.Logger) *firebase.App {
+// NewFirebaseApp creates new firebase app instance
+func NewFirebaseApp(logger *belogger.BeLogger) *firebase.App {
 
-// 	ctx := context.Background()
+	ctx := context.Background()
 
-// 	serviceAccountKeyFilePath, err := filepath.Abs("./serviceAccountKey.json")
-// 	if err != nil {
-// 		logger.Panic("Unable to load serviceAccountKey.json file")
-// 	}
+	serviceAccountKeyFilePath, err := filepath.Abs("./serviceAccountKey.json")
+	if err != nil {
+		logger.Errorf("Unable to load serviceAccountKey.json file")
+		panic(err)
+	}
 
-// 	opt := option.WithCredentialsFile(serviceAccountKeyFilePath)
+	opt := option.WithCredentialsFile(serviceAccountKeyFilePath)
 
-// 	app, err := firebase.NewApp(ctx, nil, opt)
-// 	if err != nil {
-// 		logger.Fatalf("Firebase NewApp: %v", err)
-// 	}
-// 	logger.Info("✅ Firebase app initialized.")
-// 	return app
-// }
+	app, err := firebase.NewApp(ctx, nil, opt)
+	if err != nil {
+		logger.Errorf("Firebase NewApp: %v", err)
+	}
+	logger.Info("✅ Firebase app initialized.")
+	return app
+}
 
-// // NewFBAuth creates new firebase auth client
-// func NewFBAuth(logger lib.Logger, app *firebase.App) *auth.Client {
+// NewFirebaseAuth creates new firebase auth client
+func NewFirebaseAuth(logger *belogger.BeLogger, app *firebase.App) *auth.Client {
 
-// 	ctx := context.Background()
+	ctx := context.Background()
 
-// 	firebaseAuth, err := app.Auth(ctx)
-// 	if err != nil {
-// 		logger.Fatalf("Firebase Authentication: %v", err)
-// 	}
+	firebaseAuth, err := app.Auth(ctx)
+	if err != nil {
+		logger.Errorf("Firebase Authentication: %v", err)
+	}
 
-// 	return firebaseAuth
-// }
+	return firebaseAuth
+}
 
-// // NewFirestoreClient creates new firestore client
-// func NewFirestoreClient(logger lib.Logger, app *firebase.App) *firestore.Client {
-// 	ctx := context.Background()
+// NewFirestoreClient creates new firestore client
+func NewFirestoreClient(logger *belogger.BeLogger, app *firebase.App) *firestore.Client {
+	ctx := context.Background()
 
-// 	firestoreClient, err := app.Firestore(ctx)
-// 	if err != nil {
-// 		logger.Fatalf("Firestore client: %v", err)
-// 	}
+	firestoreClient, err := app.Firestore(ctx)
+	if err != nil {
+		logger.Fatalf("Firestore client: %v", err)
+	}
 
-// 	return firestoreClient
-// }
+	return firestoreClient
+}
 
-// // NewFCMClient creates new firebase cloud messaging client
-// func NewFCMClient(logger lib.Logger, app *firebase.App) *messaging.Client {
-// 	ctx := context.Background()
-// 	messagingClient, err := app.Messaging(ctx)
-// 	if err != nil {
-// 		logger.Fatalf("Firebase messaing: %v", err)
-// 	}
-// 	return messagingClient
-// }
+// NewFirebaseMessagingClient creates new firebase cloud messaging client
+func NewFirebaseMessagingClient(logger *belogger.BeLogger, app *firebase.App) *messaging.Client {
+	ctx := context.Background()
+	messagingClient, err := app.Messaging(ctx)
+	if err != nil {
+		logger.Fatalf("Firebase messaing: %v", err)
+	}
+	return messagingClient
+}
