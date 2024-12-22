@@ -10,7 +10,6 @@ import (
 	"becore/beroutes"
 	authApis "beservice/auth/apis"
 	"context"
-	"fmt"
 
 	"go.uber.org/fx"
 )
@@ -30,9 +29,10 @@ var AuthModules = fx.Options(
 	fx.Provide(service.NewAuthService),
 	fxutil.AnnotatedProvide(routes.NewAuthRoutes, `name:"authroutes"`),
 	fxutil.AnnotatedProvide(NewBeAuthDomain, `name:"authdomain"`),
+	fx.Invoke(registerAuthLifecycleHooks),
 )
 
-func RegisterAuthLifecycleHooks(params HealthCheckModuleParams) {
+func registerAuthLifecycleHooks(params HealthCheckModuleParams) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting HealthCheckModules...")
@@ -45,8 +45,7 @@ func RegisterAuthLifecycleHooks(params HealthCheckModuleParams) {
 				authApis.AuthService_ServiceDesc,
 				params.AuthRoutes,
 			)
-			fmt.Println("### MODULE AuthModules Run")
-			params.AuthDomain.Run()
+			// params.AuthDomain.Run()
 			// go func() { params.AuthDomain.Run() }()
 			// handle and return error here
 			return nil

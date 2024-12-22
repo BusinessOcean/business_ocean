@@ -37,7 +37,6 @@ func (s *BegoServer) RegisterRoutes(group string, routes []*beroutes.Route) erro
 		}
 		// Register the route
 		party.Handle(route.Method, route.Path, route.Handler)
-		fmt.Println("Registering route: ---->", route.Path)
 	}
 
 	return nil
@@ -72,10 +71,17 @@ func (s *BegoServer) GetGrpcServer() *BeGRPCServer {
 	return s.grpc
 }
 func (s *BegoServer) RunServer() error {
-	err := s.http.Run(iris.TLS(":50051", "./cert/server.crt", "./cert/server.key"))
+	fmt.Printf("Registering route: ----> %v", len(s.http.GetRoutes()))
+
+	err := s.http.Run(iris.TLS(":5051", "./cert/server.crt", "./cert/server.key"))
 	if err != nil {
 		s.http.Logger().Errorf("Failed to run HTTP server: %v", err)
 		return err
 	}
 	return nil
 }
+
+// func getRandomPort() int {
+// 	rand.Seed(uint64(time.Now().UnixNano()))
+// 	return rand.Intn(3000) + 5000
+// }

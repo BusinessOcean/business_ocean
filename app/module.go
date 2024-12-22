@@ -15,16 +15,15 @@ import (
 )
 
 var AppModule = fx.Options(
-	becore.BecoreModule,
 	fxutil.AnnotatedProvide(bectx.NewBeCtx, `name:"bectx"`),
 	fxutil.AnnotatedProvide(bectx.NewBeAppCtx, `name:"beappctx"`),
+	becore.BecoreModule,
+	fx.Provide(bego.NewBegoApp),
+	fx.Provide(bego.NewBegoCommand),
 	becommon.BeCommonModule,
 	bedatabase.DatabaseModules,
 	fx.Provide(bedomain.NewBaseDomain),
-	fx.Provide(bego.NewBegoApp),
-	fx.Provide(bego.NewBegoCommand),
-	healthcheck.HealthCheckModules,
 	auth.AuthModules,
-	fx.Invoke(healthcheck.RegisterHealthCheckLifecycleHooks),
-	fx.Invoke(auth.RegisterAuthLifecycleHooks),
+	healthcheck.HealthCheckModules,
+	// fx.Provide(bego.NewBeAppServiceDomain),
 )

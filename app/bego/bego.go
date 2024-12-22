@@ -30,6 +30,7 @@ func (b *begoCommand) Run() command.CommandRunner {
 		// app.logger.Info("Bego is running with logger")
 		app.Bootstrap()
 		app.IsDev()
+		app.Run()
 		// app.Run()
 		// app.Logger.Info("Bego is running with logger")
 
