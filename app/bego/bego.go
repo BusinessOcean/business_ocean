@@ -2,6 +2,7 @@ package bego
 
 import (
 	"beconsole/command"
+	"time"
 
 	"github.com/spf13/cobra"
 )
@@ -29,8 +30,12 @@ func (b *begoCommand) Run() command.CommandRunner {
 		// fmt.Printf("Config: %v\n", &app.BaseApp)
 		// app.logger.Info("Bego is running with logger")
 		app.Bootstrap()
+		app.GetModules()
 		app.IsDev()
-		app.Run()
+		go func() {
+			time.Sleep(5 * time.Second)
+			app.Run()
+		}()
 		// app.Run()
 		// app.Logger.Info("Bego is running with logger")
 

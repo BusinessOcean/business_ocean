@@ -22,7 +22,7 @@ type BeHealthCheckDomain struct {
 	service *service.HealthCheckService
 }
 
-func NewBeHealthCheckDomain(params DomainParams) *BeHealthCheckDomain {
+func NewBeHealthCheckDomain(params DomainParams) bedomain.IBeDomain {
 	return &BeHealthCheckDomain{
 		BaseDomain: params.BaseModules,
 		service:    params.Service,

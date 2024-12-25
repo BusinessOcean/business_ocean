@@ -15,6 +15,6 @@ func main() {
 	// run Bego App Command
 	appCmd = append(appCmd, command.NewCommand(cmds, AppModule))
 
-	var businessocean = beconsole.NewBeConsole(appCmd)
-	businessocean.Execute()
+	var appConsole = beconsole.NewBeConsole(appCmd)
+	appConsole.Execute()
 }

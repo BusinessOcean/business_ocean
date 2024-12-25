@@ -2,9 +2,11 @@ package becore
 
 import (
 	"becommon/bectx"
+	"becommon/bedomain"
 	"becore/beconfig"
 	"becore/belogger"
 	"becore/beserver"
+	"fmt"
 )
 
 var _ IBegoApp = (*BaseApp)(nil)
@@ -14,6 +16,7 @@ type BaseApp struct {
 	config *beconfig.AppConfig
 	logger *belogger.BeLogger
 	server *beserver.BegoServer
+	domain []bedomain.IBeDomain
 }
 
 func NewBaseApp(
@@ -21,12 +24,14 @@ func NewBaseApp(
 	config *beconfig.AppConfig,
 	logger *belogger.BeLogger,
 	server *beserver.BegoServer,
+	domain []bedomain.IBeDomain,
 ) *BaseApp {
 	return &BaseApp{
 		appCtx: appCtx,
 		config: config,
 		logger: logger,
 		server: server,
+		domain: domain,
 	}
 }
 
@@ -49,6 +54,17 @@ func (app *BaseApp) Run() error {
 func (app *BaseApp) IsDev() bool {
 	if app.config.Info.Mode == "development" {
 		return true
+	}
+	return false
+}
+
+func (app *BaseApp) GetModules() bool {
+	fmt.Println("Modules: ", app.domain)
+
+	for _, domain := range app.domain {
+		fmt.Println("Setting up domain:", len(app.domain))
+		fmt.Printf("Domain type: %T\n", domain)
+		domain.Setup()
 	}
 	return false
 }

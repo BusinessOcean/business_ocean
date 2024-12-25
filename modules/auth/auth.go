@@ -25,7 +25,7 @@ type BeAuthDomain struct {
 	routes  []*beroutes.Route
 }
 
-func NewBeAuthDomain(params DomainParams) *BeAuthDomain {
+func NewBeAuthDomain(params DomainParams) bedomain.IBeDomain {
 	return &BeAuthDomain{
 		BaseDomain: params.BaseModules,
 		service:    params.Service,
