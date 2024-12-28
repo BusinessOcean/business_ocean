@@ -9,9 +9,8 @@ import (
 
 func NewHealthCheckRoutes(service *service.HealthCheckService) []*beroutes.Route {
 
-	healthRoute := beroutes.NewRoutes(iris.MethodGet, "/health", service.HealthCheckApiRoute)
-	healthRoute2 := beroutes.NewRoutes(iris.MethodGet, "/health1", service.HealthCheckApiRoute2)
-	routes := []*beroutes.Route{healthRoute, healthRoute2}
+	healthRoute := beroutes.NewRoutes(iris.MethodGet, "/healthcheck", service.HealthCheckApiRoute)
+	routes := []*beroutes.Route{healthRoute}
 
 	return routes
 }

@@ -22,5 +22,7 @@ var AppModule = fx.Options(
 	fx.Provide(bego.NewBegoApp),
 	fx.Provide(bego.NewBegoCommand),
 	healthcheck.HealthCheckModules,
+	fx.Invoke(healthcheck.RegisterHealthLifecycleHooks),
 	auth.AuthModules,
+	fx.Invoke(auth.RegisterAuthLifecycleHooks),
 )

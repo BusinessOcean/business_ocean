@@ -9,7 +9,7 @@ import (
 
 func NewAuthRoutes(service *service.AuthService) []*beroutes.Route {
 
-	healthRoute := beroutes.NewRoutes(iris.MethodGet, "/health", service.AuthHealthCheck)
+	healthRoute := beroutes.NewRoutes(iris.MethodGet, "/authhealth", service.AuthHealthCheck)
 	routes := []*beroutes.Route{healthRoute}
 
 	return routes

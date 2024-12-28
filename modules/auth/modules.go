@@ -8,8 +8,9 @@ import (
 	"becommon/fxutil"
 	"becore/belogger"
 	"context"
+	"fmt"
 
-	authApi "beservice/auth/apis"
+	auth "beservice/auth/apis"
 
 	"go.uber.org/fx"
 )
@@ -18,7 +19,7 @@ type AuthModuleParams struct {
 	fx.In
 	Lifecycle fx.Lifecycle
 	Logger    *belogger.BeLogger
-	Auth      *BeAuthkDomain `name:"auth"`
+	Auth      *BeAuthkDomain
 }
 
 var AuthModules = fx.Options(
@@ -26,7 +27,8 @@ var AuthModules = fx.Options(
 	fx.Provide(adapters.NewAuthAdapter),
 	fx.Provide(service.NewAuthService),
 	fxutil.AnnotatedProvide(routes.NewAuthRoutes, `name:"authroutes"`),
-	fxutil.AnnotatedProvide(NewBeAuthDomain, `name:"auth"`),
+	// fxutil.AnnotatedProvide(NewBeAuthDomain, `name:"auth"`),
+	fx.Provide(NewBeAuthDomain),
 )
 
 func RegisterAuthLifecycleHooks(params AuthModuleParams) {
@@ -34,16 +36,20 @@ func RegisterAuthLifecycleHooks(params AuthModuleParams) {
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting AuthModule...")
 			params.Auth.Setup()
+
+			fmt.Printf("Service Name : %v", auth.AuthService_ServiceDesc)
+			fmt.Printf("Service Service : %v", params.Auth.service)
+
 			params.Auth.Register(
-				authApi.AuthService_ServiceDesc,
+				auth.AuthService_ServiceDesc,
 				params.Auth.service,
 			)
 			params.Auth.RegisterRoutes(
-				authApi.AuthService_ServiceDesc,
+				auth.AuthService_ServiceDesc,
 				params.Auth.routes,
 			)
 			go func() {
-				params.Auth.Run()
+				params.Auth.Run(":5003")
 			}()
 
 			params.Logger.Println("AuthModule is running")

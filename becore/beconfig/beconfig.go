@@ -8,16 +8,23 @@ import (
 
 // Config struct to hold configuration values
 type AppConfig struct {
-	Info     Info           `mapstructure:"info"`
-	Dgraph   DgraphConfig   `mapstructure:"dgraph"`
-	Postgres PostgresConfig `mapstructure:"postgres"`
-	Jwt      JwtConfig      `mapstructure:"jwt"`
-	Cloud    CloudConfig    `mapstructure:"cloud"`
+	Info        Info           `mapstructure:"info"`
+	Dgraph      DgraphConfig   `mapstructure:"dgraph"`
+	Postgres    PostgresConfig `mapstructure:"postgres"`
+	Jwt         JwtConfig      `mapstructure:"jwt"`
+	Cloud       CloudConfig    `mapstructure:"cloud"`
+	Auth        ModuleConfig   `mapstructure:"auth"`
+	HealthCheck ModuleConfig   `mapstructure:"healthcheck"`
 }
 
 // DgraphConfig holds Dgraph-related settings
 type DgraphConfig struct {
 	Host string `mapstructure:"host"`
+}
+
+type ModuleConfig struct {
+	Host string `mapstructure:"host"`
+	Port string `mapstructure:"port"`
 }
 
 // PostgresConfig holds Postgres-related settings

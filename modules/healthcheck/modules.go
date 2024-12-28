@@ -18,7 +18,7 @@ type HealthCheckModuleParams struct {
 	fx.In
 	Lifecycle   fx.Lifecycle
 	Logger      *belogger.BeLogger
-	HealthCheck *BeHealthCheckDomain `name:"healthcheck"`
+	HealthCheck *BeHealthCheckDomain
 }
 
 var HealthCheckModules = fx.Options(
@@ -26,8 +26,7 @@ var HealthCheckModules = fx.Options(
 	fx.Provide(adapters.NewHealthCheckAdapter),
 	fx.Provide(service.NewHealthCheckService),
 	fxutil.AnnotatedProvide(routes.NewHealthCheckRoutes, `name:"healthcheckroutes"`),
-	fxutil.AnnotatedProvide(NewBeHealthCheckDomain, `name:"healthcheck"`),
-	fx.Invoke(RegisterHealthLifecycleHooks),
+	fx.Provide(NewBeHealthCheckDomain),
 )
 
 func RegisterHealthLifecycleHooks(params HealthCheckModuleParams) {
@@ -35,6 +34,10 @@ func RegisterHealthLifecycleHooks(params HealthCheckModuleParams) {
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting HealthCheckModules...")
 			params.HealthCheck.Setup()
+
+			fmt.Printf("Service Name : %v", healthcheck.HealthCheckService_ServiceDesc)
+			fmt.Printf("Service Service : %v", params.HealthCheck.service)
+
 			params.HealthCheck.Register(
 				healthcheck.HealthCheckService_ServiceDesc,
 				params.HealthCheck.service,
@@ -44,7 +47,7 @@ func RegisterHealthLifecycleHooks(params HealthCheckModuleParams) {
 				params.HealthCheck.routes,
 			)
 			go func() {
-				params.HealthCheck.Run()
+				params.HealthCheck.Run(":5002")
 			}()
 			fmt.Println("HealthCheckModules is running")
 			// handle and return error here

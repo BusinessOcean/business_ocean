@@ -15,7 +15,7 @@ type DomainParams struct {
 
 	BaseModules *bedomain.BaseDomain `name:"domain"`
 	Service     *service.AuthService
-	Routes      []*beroutes.Route
+	Routes      []*beroutes.Route `name:"authroutes"`
 }
 
 type BeAuthkDomain struct {

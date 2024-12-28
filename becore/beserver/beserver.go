@@ -1,6 +1,7 @@
 package beserver
 
 import (
+	"becore/belogger"
 	"becore/beroutes"
 	"betypes/beerror"
 	"fmt"
@@ -11,18 +12,22 @@ import (
 )
 
 type BegoServer struct {
-	http *BeHTTPServer
-	grpc *BeGRPCServer
+	logger *belogger.BeLogger
+	http   *BeHTTPServer
+	grpc   *BeGRPCServer
 }
 
 func NewBegoServer(
+	logger *belogger.BeLogger,
+
 	http *BeHTTPServer,
 	grpc *BeGRPCServer,
 ) *BegoServer {
 
 	server := BegoServer{
-		http: http,
-		grpc: grpc,
+		logger: logger,
+		http:   http,
+		grpc:   grpc,
 	}
 	return &server
 }
@@ -50,8 +55,7 @@ func (s *BegoServer) Register(desc grpc.ServiceDesc, handler interface{}) error 
 		return beerror.ErrRegisterNilHandler
 	}
 
-	fmt.Println("Registering service: ", desc.ServiceName)
-	fmt.Println("Handler: ", handler)
+	s.logger.Infof("Registering service: %v", desc.ServiceName)
 
 	s.grpc.RegisterService(&desc, handler)
 	appServer := mvc.New(s.http)
@@ -72,8 +76,8 @@ func (s *BegoServer) GetHttpServer() *BeHTTPServer {
 func (s *BegoServer) GetGrpcServer() *BeGRPCServer {
 	return s.grpc
 }
-func (s *BegoServer) RunServer() error {
-	err := s.http.Run(iris.TLS(":50051", "./cert/server.crt", "./cert/server.key"))
+func (s *BegoServer) RunServer(port string) error {
+	err := s.http.Run(iris.TLS(port, "./cert/server.crt", "./cert/server.key"))
 	if err != nil {
 		s.http.Logger().Errorf("Failed to run HTTP server: %v", err)
 		return err

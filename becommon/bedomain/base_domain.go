@@ -1,6 +1,7 @@
 package bedomain
 
 import (
+	"becore/beconfig"
 	"becore/belogger"
 	"becore/beroutes"
 	"becore/beserver"
@@ -11,19 +12,19 @@ import (
 var _ IBeDomain = (*BaseDomain)(nil)
 
 type BaseDomain struct {
-	// config *BeDomainConfig
+	config *beconfig.AppConfig
 	server *beserver.BegoServer
 	logger *belogger.BeLogger
 }
 
 // New BaseDomainModule
 func NewBaseDomain(
-	// config *BeDomainConfig,
+	config *beconfig.AppConfig,
 	logger *belogger.BeLogger,
 	server *beserver.BegoServer,
 ) *BaseDomain {
 	return &BaseDomain{
-		// config: config,
+		config: config,
 		logger: logger,
 		server: server,
 	}
@@ -54,11 +55,30 @@ func (d *BaseDomain) RegisterRoutes(desc grpc.ServiceDesc, routes []*beroutes.Ro
 	return nil
 }
 
-func (d *BaseDomain) Run() error {
-	d.server.RunServer()
+func (d *BaseDomain) Run(port string) error {
+	// port, err := getRandomPort()
+	// if err != nil {
+	// 	return fmt.Errorf("Error: %v", err)
+	// }
+
+	// fmt.Println("Random available port:", port)
+
+	d.server.RunServer(port)
 	return nil
 }
 
 func (d *BaseDomain) OnTerminate() error {
 	return nil
 }
+
+// func getRandomPort() (string, error) {
+// 	listener, err := net.Listen("tcp", ":0") // Use ":0" to let the OS pick an available port
+// 	if err != nil {
+// 		return "", fmt.Errorf("could not find an available port: %v", err)
+// 	}
+// 	defer listener.Close()
+
+// 	// Get the port from the listener
+// 	addr := listener.Addr().(*net.TCPAddr)
+// 	return fmt.Sprintf(":%d", addr.Port), nil
+// }

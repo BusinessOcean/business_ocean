@@ -21,3 +21,10 @@ cloud:
   secret: "your_cloud_secret"
 
 
+auth:
+  host: "localhost"
+  port: 7000
+  
+health:
+  host: "localhost"
+  port: 6000
