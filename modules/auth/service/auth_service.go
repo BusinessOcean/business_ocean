@@ -25,6 +25,6 @@ func (hc AuthService) AuthStart(context.Context, *apis.AuthStartRequest) (*apis.
 	return &apis.AuthStartResponse{Message: "Auth working"}, nil
 }
 
-func (hc AuthService) HealthCheckApiRoute(ctx iris.Context) {
+func (hc AuthService) AuthHealthCheck(ctx iris.Context) {
 	ctx.JSON(iris.Map{"status": "Auth service is up and running"})
 }

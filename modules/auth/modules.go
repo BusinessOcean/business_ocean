@@ -25,12 +25,11 @@ var AuthModules = fx.Options(
 	fx.Provide(repository.NewHealthCheckRepository),
 	fx.Provide(adapters.NewAuthAdapter),
 	fx.Provide(service.NewAuthService),
-	fx.Provide(routes.NewAuthRoutes),
+	fxutil.AnnotatedProvide(routes.NewAuthRoutes, `name:"authroutes"`),
 	fxutil.AnnotatedProvide(NewBeAuthDomain, `name:"auth"`),
-	fx.Invoke(registerLifecycleHooks),
 )
 
-func registerLifecycleHooks(params AuthModuleParams) {
+func RegisterAuthLifecycleHooks(params AuthModuleParams) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting AuthModule...")
@@ -43,7 +42,12 @@ func registerLifecycleHooks(params AuthModuleParams) {
 				authApi.AuthService_ServiceDesc,
 				params.Auth.routes,
 			)
-			params.Auth.Run()
+			go func() {
+				params.Auth.Run()
+			}()
+
+			params.Logger.Println("AuthModule is running")
+
 			// handle and return error here
 			return nil
 		},

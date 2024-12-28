@@ -5,6 +5,7 @@ import (
 	"becore/belogger"
 	healthcheck "beservice/healthcheck/apis"
 	"context"
+	"fmt"
 	"healthcheck/adapters"
 	"healthcheck/repository"
 	"healthcheck/routes"
@@ -24,12 +25,12 @@ var HealthCheckModules = fx.Options(
 	fx.Provide(repository.NewHealthCheckRepository),
 	fx.Provide(adapters.NewHealthCheckAdapter),
 	fx.Provide(service.NewHealthCheckService),
-	fx.Provide(routes.NewHealthCheckRoutes),
+	fxutil.AnnotatedProvide(routes.NewHealthCheckRoutes, `name:"healthcheckroutes"`),
 	fxutil.AnnotatedProvide(NewBeHealthCheckDomain, `name:"healthcheck"`),
-	fx.Invoke(registerLifecycleHooks),
+	fx.Invoke(RegisterHealthLifecycleHooks),
 )
 
-func registerLifecycleHooks(params HealthCheckModuleParams) {
+func RegisterHealthLifecycleHooks(params HealthCheckModuleParams) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting HealthCheckModules...")
@@ -42,7 +43,10 @@ func registerLifecycleHooks(params HealthCheckModuleParams) {
 				healthcheck.HealthCheckService_ServiceDesc,
 				params.HealthCheck.routes,
 			)
-			params.HealthCheck.Run()
+			go func() {
+				params.HealthCheck.Run()
+			}()
+			fmt.Println("HealthCheckModules is running")
 			// handle and return error here
 			return nil
 		},

@@ -15,7 +15,7 @@ type DomainParams struct {
 
 	BaseModules *bedomain.BaseDomain `name:"domain"`
 	Service     *service.HealthCheckService
-	Routes      []*beroutes.Route
+	Routes      []*beroutes.Route `name:"healthcheckroutes"`
 }
 
 type BeHealthCheckDomain struct {
