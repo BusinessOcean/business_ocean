@@ -13,7 +13,7 @@ var _ bedomain.IBeDomain = (*BeHealthCheckDomain)(nil)
 type DomainParams struct {
 	fx.In
 
-	BaseModules *bedomain.BaseDomain `name:"domain"`
+	BaseModules *bedomain.BaseDomain `name:"healthcheckdomain"`
 	Service     *service.HealthCheckService
 	Routes      []*beroutes.Route `name:"healthcheckroutes"`
 }

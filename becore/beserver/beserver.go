@@ -4,7 +4,6 @@ import (
 	"becore/belogger"
 	"becore/beroutes"
 	"betypes/beerror"
-	"fmt"
 
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
@@ -42,7 +41,6 @@ func (s *BegoServer) RegisterRoutes(group string, routes []*beroutes.Route) erro
 		}
 		// Register the route
 		party.Handle(route.Method, route.Path, route.Handler)
-		fmt.Println("Registering route: ---->", route.Path)
 	}
 
 	return nil

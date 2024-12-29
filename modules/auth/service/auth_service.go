@@ -38,5 +38,5 @@ func (hc AuthService) CreateUserEvent(ctx iris.Context) {
 		Username: uuid.New().String(),
 	})
 	fmt.Println("User created event published:", err)
-	ctx.JSON(iris.Map{"status": "Event test log"})
+	ctx.JSON(iris.Map{"status": "Event test log --->" + err.Error()})
 }

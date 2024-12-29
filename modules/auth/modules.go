@@ -23,10 +23,10 @@ type AuthModuleParams struct {
 }
 
 var AuthModules = fx.Options(
+	fxutil.AnnotatedProvide(routes.NewAuthRoutes, `name:"authroutes"`),
 	fx.Provide(repository.NewHealthCheckRepository),
 	fx.Provide(adapters.NewAuthAdapter),
 	fx.Provide(service.NewAuthService),
-	fxutil.AnnotatedProvide(routes.NewAuthRoutes, `name:"authroutes"`),
 	fx.Provide(NewBeAuthDomain),
 	fx.Invoke(registerAuthLifecycleHooks),
 )

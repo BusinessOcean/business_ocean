@@ -22,10 +22,10 @@ type HealthCheckModuleParams struct {
 }
 
 var HealthCheckModules = fx.Options(
+	fxutil.AnnotatedProvide(routes.NewHealthCheckRoutes, `name:"healthcheckroutes"`),
 	fx.Provide(repository.NewHealthCheckRepository),
 	fx.Provide(adapters.NewHealthCheckAdapter),
 	fx.Provide(service.NewHealthCheckService),
-	fxutil.AnnotatedProvide(routes.NewHealthCheckRoutes, `name:"healthcheckroutes"`),
 	fx.Provide(NewBeHealthCheckDomain),
 	fx.Invoke(registerHealthLifecycleHooks),
 )
