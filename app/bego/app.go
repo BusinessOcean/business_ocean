@@ -2,6 +2,7 @@ package bego
 
 import (
 	"becommon/bectx"
+	"becommon/beevent"
 	"becore"
 	"becore/beconfig"
 	"becore/belogger"
@@ -16,6 +17,7 @@ type BegoAppParams struct {
 	Config   *beconfig.AppConfig
 	Logger   *belogger.BeLogger
 	Server   *beserver.BegoServer
+	EventBus *beevent.BeEventBus
 }
 
 // BegoApp is the main application struct
@@ -25,7 +27,7 @@ type BegoApp struct {
 }
 
 func NewBegoApp(p BegoAppParams) *BegoApp {
-	baseApp := becore.NewBaseApp(p.Beappctx, p.Config, p.Logger, p.Server)
+	baseApp := becore.NewBaseApp(p.Beappctx, p.Config, p.Logger, p.Server, p.EventBus)
 	app := &BegoApp{BaseApp: baseApp}
 	return app
 }

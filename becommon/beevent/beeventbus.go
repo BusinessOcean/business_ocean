@@ -1,6 +1,7 @@
 package beevent
 
 import (
+	"errors"
 	"reflect"
 	"sync"
 )
@@ -12,14 +13,14 @@ type BeEventBus struct {
 }
 
 // NewEventBus creates a new EventBus instance.
-func NewEventBus() *BeEventBus {
+func NewBeEventBus() *BeEventBus {
 	return &BeEventBus{
 		subscribers: make(map[reflect.Type][]reflect.Value),
 	}
 }
 
 // Subscribe adds a new subscriber for a specific event type.
-func (eb *BeEventBus) Subscribe(eventType interface{}, handler interface{}) {
+func (eb *BeEventBus) Subscribe(eventType interface{}, handler interface{}) error {
 	eb.mutex.Lock()
 	defer eb.mutex.Unlock()
 
@@ -27,23 +28,41 @@ func (eb *BeEventBus) Subscribe(eventType interface{}, handler interface{}) {
 	handlerValue := reflect.ValueOf(handler)
 
 	if handlerValue.Kind() != reflect.Func {
-		panic("handler must be a function")
+		return errors.New("handler must be a function")
+	}
+
+	// Check if handler has the correct signature
+	if handlerValue.Type().NumIn() != 1 || handlerValue.Type().In(0) != evtType {
+		return errors.New("handler must have a single parameter of the event type")
+	}
+
+	// Check if handler returns an error
+	if handlerValue.Type().NumOut() != 1 || handlerValue.Type().Out(0) != reflect.TypeOf((*error)(nil)).Elem() {
+		return errors.New("handler must return a single error value")
 	}
 
 	eb.subscribers[evtType] = append(eb.subscribers[evtType], handlerValue)
+	return nil
 }
 
 // Publish sends an event to all subscribers of the event type.
-func (eb *BeEventBus) Publish(event interface{}) {
+func (eb *BeEventBus) Publish(event interface{}) error {
 	eb.mutex.RLock()
 	defer eb.mutex.RUnlock()
 
 	evtType := reflect.TypeOf(event)
 
-	if handlers, found := eb.subscribers[evtType]; found {
-		for _, handler := range handlers {
-			// Call the handler with the event
-			handler.Call([]reflect.Value{reflect.ValueOf(event)})
+	handlers, found := eb.subscribers[evtType]
+	if !found {
+		return errors.New("no subscribers for event type")
+	}
+
+	for _, handler := range handlers {
+		// Call the handler with the event
+		results := handler.Call([]reflect.Value{reflect.ValueOf(event)})
+		if err := results[0].Interface(); err != nil {
+			return err.(error)
 		}
 	}
+	return nil
 }

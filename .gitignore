@@ -4,3 +4,5 @@ api/protobuf/*/google/*
 api/protobuf/*/validate/*
 temp
 tmp
+firebase-debug.log
+firestore-debug.log

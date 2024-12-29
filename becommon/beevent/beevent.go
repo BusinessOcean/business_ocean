@@ -1,5 +1,5 @@
 package beevent
 
-type ExampleHookEvent struct {
-	// App App
+type UserCreatedEvent struct {
+	Username string
 }

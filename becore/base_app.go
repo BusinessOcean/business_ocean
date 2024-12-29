@@ -2,6 +2,7 @@ package becore
 
 import (
 	"becommon/bectx"
+	"becommon/beevent"
 	"becore/beconfig"
 	"becore/belogger"
 	"becore/beserver"
@@ -14,6 +15,8 @@ type BaseApp struct {
 	config *beconfig.AppConfig
 	logger *belogger.BeLogger
 	server *beserver.BegoServer
+
+	eventBus *beevent.BeEventBus
 }
 
 func NewBaseApp(
@@ -21,12 +24,14 @@ func NewBaseApp(
 	config *beconfig.AppConfig,
 	logger *belogger.BeLogger,
 	server *beserver.BegoServer,
+	eventBus *beevent.BeEventBus,
 ) *BaseApp {
 	return &BaseApp{
-		appCtx: appCtx,
-		config: config,
-		logger: logger,
-		server: server,
+		appCtx:   appCtx,
+		config:   config,
+		logger:   logger,
+		server:   server,
+		eventBus: eventBus,
 	}
 }
 
@@ -40,6 +45,12 @@ func (app *BaseApp) OnTerminate() error {
 	// Implementation of the OnTerminate method
 
 	return nil
+}
+
+func (app *BaseApp) EventBus() *beevent.BeEventBus {
+	// Implementation of the OnTerminate method
+
+	return app.eventBus
 }
 
 func (app *BaseApp) IsDev() bool {

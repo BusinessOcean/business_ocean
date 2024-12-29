@@ -1,6 +1,7 @@
 package becore
 
 import (
+	"becommon/beevent"
 	"becore/beconfig"
 	"becore/belogger"
 	"becore/beserver"
@@ -21,4 +22,5 @@ var BecoreModule = fx.Options(
 	fx.Provide(infrastructure.NewFirebaseAuth),
 	fx.Provide(infrastructure.NewFirebaseMessagingClient),
 	fx.Provide(infrastructure.NewFirestoreClient),
+	fx.Provide(beevent.NewBeEventBus),
 )

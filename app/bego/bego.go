@@ -1,8 +1,11 @@
 package bego
 
 import (
+	"becommon/beevent"
 	"beconsole/command"
 	"becore/belogger"
+	"errors"
+	"fmt"
 
 	"github.com/spf13/cobra"
 )
@@ -30,6 +33,11 @@ func (b *begoCommand) Run() command.CommandRunner {
 		// fmt.Printf("Config: %v\n", &app.BaseApp)
 		app.Bootstrap()
 		app.IsDev()
+		app.EventBus().Subscribe(beevent.UserCreatedEvent{}, func(event beevent.UserCreatedEvent) error {
+			fmt.Println("User created:", event.Username)
+
+			return errors.New("Test event bus Error")
+		})
 
 		// app.Logger.Info("Bego is running with logger")
 
