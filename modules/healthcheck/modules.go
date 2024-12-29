@@ -27,9 +27,10 @@ var HealthCheckModules = fx.Options(
 	fx.Provide(service.NewHealthCheckService),
 	fxutil.AnnotatedProvide(routes.NewHealthCheckRoutes, `name:"healthcheckroutes"`),
 	fx.Provide(NewBeHealthCheckDomain),
+	fx.Invoke(registerHealthLifecycleHooks),
 )
 
-func RegisterHealthLifecycleHooks(params HealthCheckModuleParams) {
+func registerHealthLifecycleHooks(params HealthCheckModuleParams) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting HealthCheckModules...")

@@ -27,11 +27,11 @@ var AuthModules = fx.Options(
 	fx.Provide(adapters.NewAuthAdapter),
 	fx.Provide(service.NewAuthService),
 	fxutil.AnnotatedProvide(routes.NewAuthRoutes, `name:"authroutes"`),
-	// fxutil.AnnotatedProvide(NewBeAuthDomain, `name:"auth"`),
 	fx.Provide(NewBeAuthDomain),
+	fx.Invoke(registerAuthLifecycleHooks),
 )
 
-func RegisterAuthLifecycleHooks(params AuthModuleParams) {
+func registerAuthLifecycleHooks(params AuthModuleParams) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			params.Logger.Info("Starting AuthModule...")
