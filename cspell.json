@@ -1,0 +1,20 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": [
+    "**/*.g.dart",
+    "**/*.freezed.dart",
+    "**/*.gr.dart",
+    "**/generated/**",
+    "**/build/**",
+    "**/.dart_tool/**",
+    "**/pubspec.lock",
+    "**/*.pb.dart",
+    "**/*.pbjson.dart",
+    "**/*.pbgrpc.dart"
+  ],
+  "words": ["DGRAPH"],
+  "flagWords": [],
+  "allowCompoundWords": true,
+  "ignoreRegExpList": ["/0x[0-9A-Fa-f]+/g", "/\\b[A-Z]{2,}\\b/g"]
+}

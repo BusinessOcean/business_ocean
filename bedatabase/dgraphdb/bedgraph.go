@@ -47,8 +47,14 @@ func (db *BeDgraphDB) Connect() error {
 
 // Connect connects to the in-memory database (no operation for in-memory implementation).
 func (db *BeDgraphDB) Ping() error {
-	err := db.Ping()
-	fmt.Println("Ping DgraphDB", err)
+	// Perform a simple health check query to Dgraph
+	ctx := context.Background()
+	_, err := db.NewTxn().Query(ctx, "{ ping() }")
+	if err != nil {
+		fmt.Println("Ping DgraphDB", err)
+		return err
+	}
+	fmt.Println("Ping DgraphDB successful")
 	return nil
 }
 
