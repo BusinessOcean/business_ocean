@@ -1,30 +1,138 @@
-info:
-  app_name: "business ocean"
-  app_version: "v0.0.1" # released app version
-  build_version: "v1"
-  mode: "development" # development, production, staging
+# Business Ocean Platform Configuration
+
+platform:
+  name: "Business Ocean"
+  version: "v0.1.0"
+  environment: "development" # development, staging, production
   
-dgraph:
-  host: "localhost:9080"
+# Core platform services
+services:
+  # HTTP API Gateway
+  api:
+    host: "localhost"
+    port: 8080
+    cors_enabled: true
+    rate_limit: 1000 # requests per minute
+    
+  # gRPC Internal Services  
+  grpc:
+    host: "localhost"
+    port: 9090
+    
+  # WebSocket for real-time sync
+  websocket:
+    host: "localhost" 
+    port: 8081
+    heartbeat_interval: 30 # seconds
 
-postgres:
-  host: "localhost"
-  port: 5433
-  user: "user"
-  password: "password"
-  dbname: "dbname"
-
-jwt:
-  secret: "your_jwt_secret"
-
-cloud:
-  secret: "your_cloud_secret"
-
-
+# Data storage
+database:
+  # Primary database for platform data
+  postgres:
+    host: "localhost"
+    port: 5432
+    database: "business_ocean"
+    username: "postgres"
+    password: "password"
+    ssl_mode: "disable"
+    max_connections: 100
+    
+  # Cache and session storage
+  redis:
+    host: "localhost"
+    port: 6379
+    password: ""
+    database: 0
+    
+# Authentication & Security
 auth:
-  host: "localhost"
-  port: 7000
-  
-health:
-  host: "localhost"
-  port: 6000
+  jwt:
+    secret: "your-super-secret-jwt-key-change-in-production"
+    access_token_ttl: "24h"
+    refresh_token_ttl: "7d"
+    
+  # Rate limiting and security
+  security:
+    bcrypt_cost: 12
+    max_login_attempts: 5
+    lockout_duration: "15m"
+
+# Data synchronization settings
+sync:
+  # Sync engine configuration
+  engine:
+    batch_size: 100
+    sync_interval: "30s"
+    conflict_resolution: "last_write_wins" # last_write_wins, manual, business_rules
+    
+  # Offline support
+  offline:
+    max_offline_hours: 72
+    local_storage_limit: "500MB"
+    
+# Business module configurations
+modules:
+  # Available modules for different business types
+  available:
+    - "queue"        # Queue management
+    - "appointments" # Appointment scheduling  
+    - "orders"       # Order management
+    - "inventory"    # Stock management
+    - "tables"       # Table/room management
+    - "staff"        # Employee management
+    - "customers"    # Customer data
+    - "payments"     # Payment processing
+    
+  # Module-specific settings
+  queue:
+    max_queue_size: 100
+    auto_cleanup_hours: 24
+    
+  appointments:
+    advance_booking_days: 30
+    reminder_hours: [24, 2] # hours before appointment
+    
+  orders:
+    auto_expire_minutes: 30
+    kitchen_display_refresh: "5s"
+
+# Business tenant settings  
+tenants:
+  # Multi-tenancy configuration
+  isolation: "schema" # schema, database, application
+  max_users_per_tenant: 50
+  default_modules: ["queue", "staff", "customers"]
+
+# External integrations
+integrations:
+  # Payment processors
+  payments:
+    stripe:
+      enabled: false
+      public_key: ""
+      secret_key: ""
+      
+  # SMS/Email notifications
+  notifications:
+    twilio:
+      enabled: false
+      account_sid: ""
+      auth_token: ""
+      
+# Monitoring and observability
+monitoring:
+  # Logging
+  logging:
+    level: "info" # debug, info, warn, error
+    format: "json" # json, text
+    
+  # Metrics
+  metrics:
+    enabled: true
+    prometheus_port: 9091
+    
+  # Health checks
+  health:
+    endpoint: "/health"
+    database_check: true
+    redis_check: true
